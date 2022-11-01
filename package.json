@@ -1,6 +1,10 @@
 {
   "name": "pharmabot",
   "version": "4.0.2",
+  "engines": {
+    "node": "16.10.0",
+    "npm":"7.24.0"
+  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve --port 9000  ",
