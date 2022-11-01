@@ -1,0 +1,28 @@
+@import "src/theme";
+
+.comparateur-setting-mobile-couleur {
+  padding: .5em 1em;
+  border-radius: 24px;
+  font-weight: bold;
+}
+
+input.prix-vente {
+  border: none;
+  width: 40px;
+  margin-left: 1em;
+  background-color: transparent;
+  font-weight: 600;
+  padding: 0.25em;
+  height: 30px;
+  outline: none;
+}
+
+.setting {
+  padding: .5em 1em;
+  background-color: white;
+  box-shadow: rgb(0 0 0 / 10%) 0px 20px 25px -5px, rgb(0 0 0 / 4%) 0px 10px 10px -5px;
+  position: sticky;
+  position: -webkit-sticky;
+  z-index: 5;
+  width: 100%;
+}

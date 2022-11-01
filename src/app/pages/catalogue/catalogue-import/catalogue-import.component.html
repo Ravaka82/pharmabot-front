@@ -1,0 +1,92 @@
+<div class="container">
+  <div fxLayout="row" fxLayoutGap="14px">
+    <app-page-title title="Import catalogue" [subtitle]="importForm.fournisseur" [previousLink]="'/catalogue'"></app-page-title>
+  </div>
+  <mat-stepper [linear]="!isImporting" #stepper>
+    <mat-step [editable]="isEditable">
+      <ng-template matStepLabel>Date du catalogue</ng-template>
+      <div fxLayout="column" fxLayoutAlign="center center">
+        <mat-form-field appearance="outline">
+          <mat-label>Catalogue {{importForm?.fournisseur}}</mat-label>
+          <input matInput readonly [matDatepicker]="picker" #dateCatalogue
+                 [max]="today"
+                 (click)="picker.open()" (dateChange)="importForm.date_catalogue = dateCatalogue.value; stepper.next()"
+          >
+          <mat-datepicker-toggle matSuffix  [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker touchUi #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+    </mat-step>
+    <mat-step [editable]="isEditable">
+      <form>
+        <ng-template matStepLabel>Import excel</ng-template>
+        <div fxLayout="column" fxLayoutAlign="center center">
+          <p>Importer le catalogue de <b>{{importForm.fournisseur}}</b> - {{importForm.date_catalogue}}</p>
+          <div class="file-input" (click)="fileInput.click()" mat-ripple>
+            <material-icon name="cloud_upload"></material-icon>
+            <span *ngIf="importForm.file">{{importForm.file.name}}</span>
+            <span *ngIf="!importForm.file">Fichier supportés (.xls, .xlsx, .xlm, .csv)</span>
+          </div>
+          <input type="file" #fileInput hidden (change)="checkFile($event, stepper)" [accept]="acceptedFileFormat">
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [editable]="isEditable" >
+      <ng-template matStepLabel>Feuille à traiter</ng-template>
+      <div fxLayout="column" fxLayoutAlign="center center">
+        <p>Sélectionnez la feuille excel à traiter.</p>
+        <mat-chip-list>
+          <mat-chip *ngFor="let feuille of sheets"
+                    (click)="sheetSelected(feuille, stepper)"
+          >{{feuille}}</mat-chip>
+        </mat-chip-list>
+      </div>
+    </mat-step>
+    <mat-step [editable]="isEditable">
+      <form>
+        <ng-template matStepLabel>Configuration</ng-template>
+        <div fxLayout="column" fxLayoutAlign="center center" class="position-relative">
+          <p>Configurez les colonnes selon la table excel présent dans <b>{{importForm.excel.feuille}}</b></p>
+          <app-import-setting
+            [workbook]="workbook"
+            [sheetName]="importForm.excel.feuille"
+            [savedParams]="savedParams"
+            (configChange)="onConfigChanged($event)"
+          ></app-import-setting>
+          <div id="ok-button">
+            <button mat-raised-button color="primary" [disabled]="loading || isImporting" (click)="import(stepper)">
+              <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="18px">
+                <span>OK, C'est bon !</span>
+              </div>
+            </button>
+            <mat-progress-bar mode="indeterminate" *ngIf="isImporting"></mat-progress-bar>
+          </div>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Done</ng-template>
+      <div fxLayout="column" fxLayoutAlign="center center">
+        <ng-lottie *ngIf="stepper.selectedIndex === 4" [options]="lottiesOptions" width="125px"></ng-lottie>
+        <p>Le catalogue <b>{{importForm?.fournisseur}}</b> a été mis à jour avec succès !</p>
+        <div>
+          <button mat-button routerLink="/catalogue">
+            <div fxLayoutAlign="center center" fxLayoutGap="8px">
+              <material-icon name="arrow_back"></material-icon>
+              <span>Retour vers catalogue</span>
+            </div>
+          </button>
+        </div>
+      </div>
+    </mat-step>
+  </mat-stepper>
+
+  <div id="reset-button">
+    <button mat-raised-button (click)="reset(stepper)" color="accent">
+      <div fxLayoutAlign="center center" fxLayoutGap="8px">
+        <material-icon name="refresh"></material-icon>
+        <span>Reinitialiser</span>
+      </div>
+    </button>
+  </div>
+</div>

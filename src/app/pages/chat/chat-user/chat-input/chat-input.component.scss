@@ -1,0 +1,12 @@
+@import "../../../../../theme";
+
+.chat-input-container {
+  background-color: $gray-color;
+  border: 1px solid #c0c0c0;
+  padding: 1em;
+
+  textarea {
+    padding: 1em;
+    border-radius: 8px;
+  }
+}

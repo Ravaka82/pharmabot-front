@@ -1,0 +1,63 @@
+<div id="container" class="shadow-1" fxLayoutAlign="start center">
+  <button id="menu" mat-icon-button (click)="toggleMenu()">
+    <material-icon name="menu{{(isSideNavOpened$ | async) ? '_open' : ''}}"></material-icon>
+  </button>
+  <div
+    class="wow fadeInUp only-desktop" data-wow-delay="450ms" data-wow-duration="350ms"
+    fxLayoutAlign="center center"
+    fxLayoutGap="8px"
+    *ngIf="!(isSideNavOpened$ | async)">
+    <div fxLayoutAlign="center center" fxLayoutGap="8px">
+      <img src="../../../../assets/svg/pharmabot.svg" width="35px">
+      <span>{{appName | titlecase}}</span>
+    </div>
+    <span>{{appVersion}}</span>
+  </div>
+  <div class="only-mobile navbar-title" *ngIf="!(isSideNavOpened$ | async)">
+    <span
+      [matBadge]="badge"
+      [matBadgeHidden]="!badge || badge === 0"
+      [matBadgeColor]="color"
+    >
+      <b>{{title | uppercase}}</b>
+    </span>
+  </div>
+  <div id="internet">
+    <!--    <material-icon name="wifi"></material-icon>-->
+    <!--    <material-icon name="check_circle" id="online"></material-icon>-->
+    <!--    <material-icon name="cancel" id="offline"></material-icon>-->
+  </div>
+  <span class="fill-space"></span>
+  <div class="fill-space only-desktop" fxLayoutGap="25px" *ngIf="!(isSideNavOpened$ | async)">
+    <ng-container *ngFor="let linkss of links">
+      <button
+        class="wow fadeInUp" data-wow-delay="650ms" data-wow-duration="350ms"
+        mat-icon-button
+        *ngFor="let link of linkss?.children"
+        [matTooltip]="link.label"
+        [routerLink]="link.path"
+        routerLinkActive="active-route"
+      >
+        <material-icon [name]="link.icon" [type]="link.iconType"></material-icon>
+        <span
+              [matBadge]="link.badge"
+              [matBadgeHidden]="!link.badge || link.badge === 0"
+              [ngClass]="link.color"
+              class="mat-badge wow bounceIn"
+              data-wow-delay="1500ms"
+              data-wow-duration="300ms"
+        ></span>
+      </button>
+    </ng-container>
+
+  </div>
+
+  <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="8px" *ngIf="!(isSideNavOpened$ | async)"
+       class="wow fadeInRight" data-wow-delay="850ms" data-wow-duration="350ms"
+  >
+    <div class="avatar wow pulse account-pseudo-avatar" fxLayoutAlign="center center" data-wow-delay="1500ms">
+      <ngx-avatar name="{{account?.pseudo}}" size="30"></ngx-avatar>
+    </div>
+    <span class="only-desktop">{{account?.pseudo | titlecase}}</span>
+  </div>
+</div>

@@ -1,0 +1,79 @@
+<app-page-title title="Bon de commande"  fxLayoutAlign="left"></app-page-title>
+<div class="table-footer" fxLayout="row" fxLayoutAlign="start end">
+  <div fxLayout="row" fxLayoutAlign="center" class="btn-options" fxLayoutGap="14px">
+    <button  mat-raised-button type="submit" class="button" color="Basic"  (click)="exportExcel()">
+      <img src="assets/svg/excel.svg" alt="Bouton d'export excel" width="32">
+      <span>Export en excel</span>
+    </button>
+    <button  mat-raised-button type="submit" class="button" color="Link"  (click)="openDetail()">
+      <img src="assets/svg/pdf.png" alt="Bouton d'export excel" width="30">
+      <span>Export pdf</span>
+    </button>
+    <button  mat-raised-button type="submit" class="button" color="Link" (click)="upload()">
+      <div fxLayout="row" fxLayoutGap="8px">
+        <img src="assets/svg/gmail.png" alt="Bouton d'export excel" width="29">
+        <span> Envoyer un  email </span>
+      </div>
+    </button>
+    <button  mat-raised-button type="submit" class="button" color="Link" (click)="dropCart()" width="30px">
+      <div fxLayout="row" fxLayoutGap="8px">
+        <img src="assets/svg/boite.png" alt="Bouton d'export excel" width="35">
+        <span>Vider le panier</span>
+      </div>
+    </button>
+
+  </div>
+  <div fxLayout="row" fxLayoutAlign="center" class="btn-options" fxLayoutGap="end" >
+    <app-search (search)="onSearch($event)"></app-search>
+  </div>
+</div>
+<br>
+<mat-tab-group color="accent" (selectedTabChange)="selectedFournisseur$.next($event.index)">
+  <mat-tab *ngFor="let fournisseur of fournisseurEntries; let i = index">
+    <ng-template mat-tab-label>
+      <div fxLayout="row" fxLayoutAlign="center" class="custom-tab-header">
+        <span fxLayout="column" fxLayoutAlign="center">{{fournisseur.view}}</span>
+        <button mat-icon-button *ngIf="fournisseur.key !== 'AFFICHER_TOUT'" (click)="removeFournisseur(i)">
+          <img src="assets/svg/remove.png" alt="Bouton d'export excel" width="35">
+        </button>
+      </div>
+    </ng-template>
+  </mat-tab>
+
+</mat-tab-group>
+<ngx-datatable
+  #table
+  class="material"
+  [columns]="columns"
+  [columnMode]="ColumnMode.flex"
+  [headerHeight]="50"
+  [footerHeight]="2"
+  [rowHeight]="30"
+  [rows]="rows"
+  [scrollbarV]="true"
+>
+</ngx-datatable>
+  <div fxLayout="column" fxLayoutAlign="start end">
+    
+    <h3>TOTAL A PAYER:</h3>
+    <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="14px">
+      <img src="assets/svg/1.png" width="60">
+      <h1>Ar {{(rowTotal.prix) | number: '0.00'}}</h1>
+    </div>
+</div>
+<ng-template let-row="row" #prixTpl>
+  {{row.prix | number: '1.0-0'}}
+</ng-template>
+
+<ng-template let-row="row" #totalTpl>
+  {{row.cart_total | number: '1.0-0'}}
+</ng-template>
+
+<ng-template let-row="row" #quantityTpl>
+  <div class="designation-cart">
+    <input type="number" step="1" min="1" [value]="row.cart_count || 1" #cart_count (change)="upsertItemCart(row, cart_count.value)">
+    <button mat-icon-button (click)="removeItemCart(row)">
+      <img src="assets/svg/supr.png" width="30">
+    </button>
+  </div>
+</ng-template>

@@ -1,0 +1,49 @@
+<div class="container">
+  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="14px">
+    <app-page-title title="Gestion catalogue" [loading]="loading"></app-page-title>
+    <span class="mr-auto"></span>
+    <app-search
+      class="wow fadeInRight"
+      data-wow-delay="500ms"
+      data-wow-duration="350ms"
+      (search)="onSearch($event)"
+    ></app-search>
+  </div>
+  <div class="content">
+    <ngx-datatable
+      #table
+      class="material"
+      [columns]="columns"
+      [columnMode]="ColumnMode.force"
+      [headerHeight]="50"
+      [footerHeight]="50"
+      [rowHeight]="45"
+      [rows]="rows"
+      [scrollbarV]="true"
+      [sorts]="[{prop: 'updatedAt', dir: 'desc'}]"
+    >
+    </ngx-datatable>
+  </div>
+</div>
+
+
+<ng-template let-row="row" #catalogueTpl>
+  <span>{{row.catalogue}}</span>
+</ng-template>
+
+<ng-template let-row="row" #downloadTpl>
+  <button mat-button (click)="downloadFile(row, 'original')">
+    <img src="../../../assets/svg/excel.svg" width="28px" alt="">
+  </button>
+  <button mat-button (click)="downloadFile(row, 'json')">
+    <img src="../../../assets/svg/json.jpg" width="28px" alt="">
+  </button>
+</ng-template>
+
+<ng-template let-row="row" #deleteTpl>
+  <button mat-icon-button class="text-danger" (click)="deleteCatalogue(row)">
+    <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="8px">
+      <img src="assets/svg/supr.png" width="40">
+    </div>
+  </button>
+</ng-template>

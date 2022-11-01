@@ -1,0 +1,44 @@
+<div fxLayout="row" fxLayoutGap="24px">
+  <div class="chat-list" fxFlex="50%">
+    <h3>Pharmabookers / Groupes</h3>
+    <app-search (search)="onSearch($event)"></app-search>
+    <div class="chat-list-content">
+      <mat-selection-list [multiple]="false">
+        <cdk-virtual-scroll-viewport appendOnly itemSize="20">
+          <mat-list-option *cdkVirtualFor="let list of lists" (click)="onSelect(list)">
+            <div mat-list-icon class="mat-list-icon">
+              <ngx-avatar [name]="list.pseudo" size="40"></ngx-avatar>
+            </div>
+            <span mat-line>{{list.pseudo}}</span>
+            <mat-divider ></mat-divider>
+          </mat-list-option>
+        </cdk-virtual-scroll-viewport>
+      </mat-selection-list>
+    </div>
+  </div>
+  <div class="chat-groupe-info" fxFlex="50%">
+    <h3>Groupe</h3>
+    <mat-form-field appearance="fill">
+      <mat-label>Nom du groupe</mat-label>
+      <input type="text" matInput [(ngModel)]="groupName">
+    </mat-form-field>
+    <p>Liste des membres</p>
+    <div class="chat-list-members">
+      <mat-list>
+        <mat-list-item *ngFor="let member of selected">
+          <div mat-list-icon class="mat-list-icon">
+            <ngx-avatar [name]="member.pseudo" size="40"></ngx-avatar>
+          </div>
+          <div mat-line>
+            <span>{{member.pseudo}}</span>
+            <button mat-icon-button (click)="onRemove(member)" class="text-danger">
+              <mat-icon>clear</mat-icon>
+            </button>
+          </div>
+        </mat-list-item>
+      </mat-list>
+    </div>
+    <mat-divider></mat-divider>
+    <button type="submit" (click)="onSubmit()" mat-raised-button color="primary" [disabled]="selected.length < 2 || groupName.length === 0">Enregistrer</button>
+  </div>
+</div>

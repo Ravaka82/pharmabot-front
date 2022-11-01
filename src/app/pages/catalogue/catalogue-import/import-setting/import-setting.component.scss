@@ -1,0 +1,25 @@
+app-import-setting {
+  .placeholder {
+    border-radius: 30px;
+    display: flex;
+    width: 100px;
+    height: 36px;
+    margin: 0.5em 0;
+    border-bottom: 1px solid #e9e9e9;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 5px 1px rgb(64 60 67 / 16%);
+  }
+
+  .mat-chip {
+    cursor: pointer;
+  }
+  #import-setting {
+    .datatable-header-cell {
+      text-align: center !important;
+    }
+    .datatable-body-row:hover .datatable-row-group {
+      background-color: white !important;
+    }
+  }
+}

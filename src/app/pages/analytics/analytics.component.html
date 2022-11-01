@@ -1,0 +1,96 @@
+<div class="container">
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="14px">
+      <app-page-title title="Analytics" [loading]="loading"></app-page-title>
+    </div>
+   
+      <div class="content">
+      <form class="example-form" [formGroup]="monthForm" (ngSubmit)="onSubmit()">
+        <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>ecrire votre mois</mat-label>
+            <input matInput placeholder="entrez  votre choix" formControlName="mois">
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Select an option</mat-label>
+          <mat-select disableRipple (selectionChange)=changeRatio($event) >
+            <mat-option value="medicament" *ngFor="let section of someName" [value]="section.value">{{section.label}}</mat-option>
+          </mat-select>
+        </mat-form-field><br>
+        <button  mat-raised-button type="submit" class="button" color="primary">Rechercher</button><br>
+        <mat-progress-bar mode="indeterminate"*ngIf="submitting"></mat-progress-bar>
+        <div id="chart">
+          <apx-chart
+            [series]="chartOptions.series"
+            [chart]="chartOptions.chart"
+            [xaxis]="chartOptions.xaxis"
+            [dataLabels]="chartOptions.dataLabels"
+            [grid]="chartOptions.grid"
+            [stroke]="chartOptions.stroke"
+            [title]="chartOptions.title"
+          ></apx-chart>
+        </div>
+    </form>
+    <span class="mr-auto"></span>
+    <app-search
+    class="wow fadeInRight"
+    data-wow-delay="500ms"
+    data-wow-duration="350ms"
+    (search)="onSearch($event)"
+  ></app-search>
+      <ngx-datatable
+        #table
+        class="material"
+        [columns]="columns"
+        [columnMode]="ColumnMode.flex"
+        [headerHeight]="50"
+        [footerHeight]="50"
+        [rowHeight]="45"
+        [rows]="rows"
+        [scrollbarV]="true"
+
+        [selectionType]="SelectionType.checkbox"
+        (select)="onSelect($event)"
+        style="width: 100%;"
+      >
+        <ngx-datatable-column
+          [width]="50"
+          [sortable]="false"
+          [canAutoResize]="false"
+          [draggable]="false"
+          [resizeable]="false"
+        >
+          <ng-template
+            ngx-datatable-header-template
+            let-value="value"
+            let-allRowsSelected="allRowsSelected"
+            let-selectFn="selectFn"
+          >
+        </ng-template>
+          <ng-template
+            ngx-datatable-cell-template
+            let-value="value"
+            let-isSelected="isSelected"
+            let-onCheckboxChangeFn="onCheckboxChangeFn"
+          >
+        </ng-template>
+        </ngx-datatable-column>
+      <ngx-datatable-column name="mot rechercher" [flexGrow]="20">
+          <ng-template let-row="row" ngx-datatable-cell-template>
+              {{row._id}}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="nombre de fois" [flexGrow]="20">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.count}}
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="Supprimer" [flexGrow]="10">
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            <button mat-icon-button class="text-danger" >
+              <material-icon name="close"></material-icon>
+            </button>
+          </ng-template>
+        </ngx-datatable-column>
+      </ngx-datatable>
+    </div>
+  </div>
+  

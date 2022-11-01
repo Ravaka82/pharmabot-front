@@ -1,0 +1,35 @@
+<div  fxLayout="column" fxLayoutGap="8px" id="comparateur-setting-mobile">
+  <div fxLayout="row" fxLayoutAlign="space-between center" class="setting">
+    <mat-checkbox color="primary" [(ngModel)]="isRemise" (ngModelChange)="toolbarMenuValueChanged()">Remise</mat-checkbox>
+    <mat-checkbox color="primary" [(ngModel)]="isTva" (ngModelChange)="toolbarMenuValueChanged()">
+      <span>TVA</span>
+      <input type="number" class="prix-vente" step="0.25" [(ngModel)]="TVA" min="1" (ngModelChange)="toolbarMenuValueChanged()">
+    </mat-checkbox>
+    <mat-checkbox color="primary" [checked]="true" [disabled]="true">
+      <span>PV</span>
+      <input type="number" class="prix-vente" step="0.25" [(ngModel)]="PV" min="1" (ngModelChange)="toolbarMenuValueChanged()">
+    </mat-checkbox>
+  </div>
+
+  <div class="card" *ngFor="let setting of rows">
+    <span><b>{{setting?.fournisseur?.name}}</b></span>
+    <div fxLayout="row">
+      <div fxLayout="column" fxFlex="33%">
+        <span class="text-secondary">Catalogue</span>
+        <span>{{setting?.dateCatalogue}}</span>
+      </div>
+      <div fxLayout="column" fxFlex="33%">
+        <span class="text-secondary">Remise</span>
+        <span>{{setting?.remise}}%</span>
+      </div>
+      <div fxLayout="column">
+        <span
+          class="comparateur-setting-mobile-couleur"
+          [style.background-color]="setting.couleur"
+          [class.text-light]="setting.couleurText === 'text-white'"
+          [class.text-dark]="setting.couleurText === 'text-dark'"
+        >Couleur</span>
+      </div>
+    </div>
+  </div>
+</div>

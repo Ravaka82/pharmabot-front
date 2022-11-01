@@ -1,0 +1,33 @@
+<div class="toolbar-custom">
+  <button mat-button (click)="addRole()">
+    <div fxLayoutAlign="center">
+      <material-icon name="add"></material-icon>
+      <span>Ajouter un rôle</span>
+    </div>
+  </button>
+</div>
+<ngx-datatable
+  class="material"
+  [columns]="columns"
+  [columnMode]="ColumnMode.standard"
+  [headerHeight]="50"
+  [footerHeight]="50"
+  [rowHeight]="45"
+  [rows]="rows$ | async"
+  [scrollbarV]="true"
+  [rowClass]="getRowClass"
+  [selected]="rowSelected"
+  [selectionType]="SelectionType.single"
+  (select)="selectedRow()"
+>
+</ngx-datatable>
+
+<ng-template let-row="row" #roleTemplate>
+  <app-input-editable (change)="saveUpdate(row)" yyInputEditable [row]="row" type="text" key="label"></app-input-editable>
+</ng-template>
+
+<ng-template let-row="row" #actionTemplate>
+  <button mat-icon-button color="warn" (click)="deleteGroup(row)">
+    <material-icon name="clear"></material-icon>
+  </button>
+</ng-template>

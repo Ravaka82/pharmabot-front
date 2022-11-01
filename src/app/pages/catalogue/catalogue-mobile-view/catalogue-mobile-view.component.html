@@ -1,0 +1,21 @@
+<div class="mobile-container">
+  <div fxLayout="column" fxLayoutGap="8px">
+    <app-search
+      class="wow fadeInUp"
+      data-wow-delay="500ms"
+      data-wow-duration="350ms"
+      (search)="search.emit($event)"
+    ></app-search>
+    <div class="card" *ngFor="let catalogue of rows">
+      <b>{{catalogue.name}}</b>
+      <div fxLayout="row">
+        <span class="text-secondary" fxFlex="100%">Date du catalogue</span>
+        <span class="ml-auto">{{catalogue.dateCatalogue || '-'}}</span>
+      </div>
+      <div fxLayout="row">
+        <span class="text-secondary">Dernière importation</span>
+        <span class="ml-auto">{{(catalogue.updatedAt | date: 'dd MMM yyyy - HH:mm') || '-'}}</span>
+      </div>
+    </div>
+  </div>
+</div>

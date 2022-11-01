@@ -1,0 +1,47 @@
+<div class="container">
+  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="14px">
+    <app-page-title title="Clients" [loading]="loading"></app-page-title>
+  </div>
+  <div class="content">
+    <div class="toolbar-custom">
+      <button mat-button routerLink="/clients/new">
+        <div fxLayoutAlign="center">
+          <material-icon name="add"></material-icon>
+          <span>Ajouter un client</span>
+        </div>
+      </button>
+    </div>
+    <ngx-datatable
+      #table
+      class="material"
+      [columns]="columns"
+      [columnMode]="ColumnMode.force"
+      [headerHeight]="50"
+      [footerHeight]="50"
+      [rowHeight]="45"
+      [limit]="10"
+      [rows]="rows"
+      [scrollbarV]="true"
+      [sorts]="[{prop: 'updatedAt', dir: 'desc'}]"
+    >
+    </ngx-datatable>
+  </div>
+</div>
+
+<ng-template #officeNumberTemplate let-row="row">
+  <a href="tel:+261{{row.officeNumber}}" mat-button *ngIf="row.officeNumber">
+    <span>+261 {{ row.officeNumber | mask: ' 00 00 000 00'}}</span>
+  </a>
+</ng-template>
+
+<ng-template #phoneNumberTemplate let-row="row">
+  <a href="tel:+261{{row.phoneNumber}}" mat-button *ngIf="row.phoneNumber">
+    <span>+261 {{ row.phoneNumber | mask: ' 00 00 000 00'}}</span>
+  </a>
+</ng-template>
+
+<ng-template #actionTemplate let-row="row">
+  <button mat-icon-button color="primary" routerLink="/clients/{{row._id}}"><material-icon name="edit" type="two-tone"></material-icon></button>
+  <button mat-icon-button color="warn" (click)="deleteClient(row)"><material-icon name="delete" type="two-tone"></material-icon></button>
+</ng-template>
+

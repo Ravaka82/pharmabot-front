@@ -1,0 +1,65 @@
+@import "src/theme";
+
+app-comparateur-search {
+  .toolbar-custom {
+    padding-left: 1em;
+    .custom-input input {
+      border: none;
+      border-bottom: 1px solid #bbbbbb;
+      width: 75px;
+      margin-left: 1em;
+      background-color: transparent;
+      font-weight: 600;
+      padding: 0.25em;
+      height: 30px;
+      outline: none;
+    }
+    mat-slide-toggle {
+      width: 145px !important;
+    }
+  }
+
+  ngx-datatable {
+    height: calc(100vh - 300px) !important;
+    .datatable-body-cell {
+      font-size: 1em !important;
+    }
+  }
+
+  .chip-item {
+    padding: 0.5em 1em;
+    border-radius: 18px;
+    font-weight: bolder;
+    font-size: .9em;
+    border: 1px solid lightgrey;
+    width: fit-content;
+  }
+
+  .designation-container {
+    width: 100%;
+    font-size: .9em;
+    &:hover, &[data-checked="true"] {
+      .designation-cart {
+        display: flex;
+      }
+    }
+  }
+
+  .designation-cart {
+    display: none;
+    justify-content: start;
+     align-content: center;
+    input {
+      width: 100px;
+      text-align: center;
+      border: none;
+      font-weight: bolder;
+      border-style: solid;
+      border-color:   antiquewhite;
+      background-color: antiquewhite;
+    } 
+     border-color:  antiquewhite;
+     color: $warning-color;
+    //  border: 1px solid rgba(var(--warning-color), .5);
+   }
+}

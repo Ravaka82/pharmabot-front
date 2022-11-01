@@ -1,0 +1,32 @@
+app-comparateur-setting {
+  .material {
+    box-shadow: none !important;
+  }
+  ngx-datatable {
+    height: calc(100vh - 300px) !important;
+  }
+
+  .label-frs {
+    padding: 0.5em 1em;
+    border-radius: 18px;
+    font-weight: bolder;
+    font-size: .9em;
+    border: 1px solid lightgrey;;
+  }
+
+  .text-white {
+    .mat-select-value {
+      color: white !important;
+    }
+  }
+
+  .text-dark {
+    .mat-select-value {
+      color: black !important
+    }
+  }
+
+  .toolbar-custom {
+    border-bottom: 1px solid #e0e0e0;
+  }
+}

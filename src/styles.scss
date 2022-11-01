@@ -1,0 +1,140 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "~@swimlane/ngx-datatable/themes/material";
+@import "~@swimlane/ngx-datatable/assets/icons.css";
+@import "responsive";
+
+html, body { height: 100%; }
+body {
+  margin: 0;
+}
+
+* {
+  font-family: 'Poppins', sans-serif
+}
+
+button {
+  material-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.container {
+  //border-radius: 1rem;
+  //margin-top: 20px;
+  //margin-left: 20px;
+  //height: calc(87vh - 75px);
+  //width: calc(100% - 100px);
+  //box-shadow: 0 9px 30px rgb(51 83 145 / 8%);
+  //padding: 2em;
+  //background-color: white;
+  //overflow: auto;
+  //position: relative;
+  height: calc(100% - 64px);
+  box-shadow: 0 9px 30px rgb(51 83 145 / 8%);
+  padding: 2em;
+  background-color: white;
+  overflow: auto;
+  position: relative;
+}
+
+.ngx-datatable.material {
+  box-shadow: none;
+  .datatable-body-row {
+    border-top: 1px solid #E2E8F0;
+    //height: 45px !important;
+  }
+  .datatable-body-cell {
+    padding: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    height: inherit !important;
+  }
+  .datatable-body-cell-label {
+    width: 100% !important;
+    padding: 0 1em;
+    white-space: break-spaces;
+  }
+  datatable-header-cell.datatable-header-cell {
+    padding: 1.2em !important;
+    font-weight: bolder !important;
+    color: black !important;
+  }
+  datatable-header {
+    height: 50px !important;
+  }
+}
+
+.toolbar-custom {
+  height: 55px;
+  background-color: #f4f7f7;
+  border-bottom: 1px solid #d2d2d2;
+  display: flex;
+  align-items: center;
+}
+
+.ml-auto { margin-left: auto !important; }
+.mr-auto { margin-right: auto !important; }
+.m-auto { margin: auto !important; }
+
+app-input-editable {
+ span {
+   display: block;
+   width: 100%;
+ }
+}
+
+.cdk-global-overlay-wrapper {
+  display: flex;
+  position: absolute;
+  z-index: 1000;
+  overflow: auto;
+  pointer-events: auto;
+}
+
+.table-input {
+  height: 40px;
+  border: none;
+  padding: 1em;
+  width: 100%;
+}
+
+.shadow-1 {
+  box-shadow: 0 1px 3px 0 #0000001a,0 1px 2px 0 #0000000f!important;
+}
+
+.row-selected {
+  background-color: antiquewhite !important;
+}
+
+.text-center {
+  text-align: center !important;
+}
+
+.text-right {
+  text-align: right !important;
+}
+
+.position-relative {
+  position: relative !important;
+}
+
+.mat-badge {
+  * { color: white !important; }
+  position: absolute;
+  right: 15px;
+}
+
+.card {
+  background-color: white;
+  border-radius: 4px;
+  padding: 1em;
+  width: 88%;
+  margin: auto;
+  position: relative;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

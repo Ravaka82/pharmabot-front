@@ -1,0 +1,40 @@
+<div class="container">
+  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="14px">
+    <app-page-title title="Utilisateurs" [loading]="loading"></app-page-title>
+  </div>
+  <div class="content">
+    <div class="toolbar-custom">
+      <button mat-button (click)="openModal()">
+        <div fxLayoutAlign="center">
+          <material-icon name="add"></material-icon>
+          <span>Ajouter un utilisateur</span>
+        </div>
+      </button>
+    </div>
+    <ngx-datatable
+      #table
+      class="material"
+      [columns]="columns"
+      [columnMode]="ColumnMode.force"
+      [headerHeight]="50"
+      [footerHeight]="50"
+      [rowHeight]="45"
+      [limit]="10"
+      [rows]="rows"
+      [scrollbarV]="true"
+      [sorts]="[{prop: 'updatedAt', dir: 'desc'}]"
+    >
+    </ngx-datatable>
+  </div>
+</div>
+
+
+<ng-template #connectedTemplate let-row="row">
+  <mat-slide-toggle color="primary" [checked]="row.connected" #connected [disabled]="!row.connected" (change)="updateConnected(row, connected.checked)"></mat-slide-toggle>
+</ng-template>
+
+<ng-template #actionTemplate let-row="row">
+  <button mat-icon-button color="primary" (click)="update(row)"><material-icon name="edit" type="two-tone"></material-icon></button>
+  <button mat-icon-button color="warn" (click)="deleteUser(row)"><material-icon name="delete" type="two-tone"></material-icon></button>
+</ng-template>
+

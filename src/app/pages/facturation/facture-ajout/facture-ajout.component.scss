@@ -1,0 +1,41 @@
+@import 'src/theme';
+
+form {
+  position: relative;
+}
+
+.forms {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.lottie-paper {
+  max-width: 700px;
+}
+
+.add-more {
+  content: '';
+  width: calc(100% - 40px);
+  height: 2px;
+  border-radius: 2px;
+  background-color: $light-color;
+  position: absolute;
+  z-index: 1;
+  left: 40px;
+}
+
+#add-more-button:hover {
+  + span {
+    background-color: $primary-color;
+  }
+}
+
+.list-item {
+  border-top: 1px solid $light-color;
+  padding-top: 1em;
+}

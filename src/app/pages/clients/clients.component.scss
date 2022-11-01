@@ -1,0 +1,14 @@
+app-clients {
+  ngx-datatable {
+    height: calc(100vh - 250px)
+  }
+  .content {
+    ngx-datatable {
+      box-shadow: none;
+    }
+  }
+  .mat-display-1 {
+    margin-bottom: .65em !important;
+  }
+}
+

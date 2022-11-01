@@ -1,0 +1,23 @@
+@import "../../../theme";
+
+.mat-display-1 {
+  margin-bottom: .65em;
+}
+.material {
+  box-shadow: none;
+}
+
+ngx-datatable {
+  box-shadow: none;
+  height: calc(100vh - 250px) !important;
+}
+
+.status {
+  width: fit-content;
+  padding: .25em;
+  border-radius: 8px;
+}
+
+mat-form-field {
+  width: 146px;
+}

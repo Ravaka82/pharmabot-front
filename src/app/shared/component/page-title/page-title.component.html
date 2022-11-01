@@ -1,0 +1,27 @@
+<div fxLayoutAlign="center center" fxLayoutGap="8px" id="app-title">
+  <div class="wow fadeInUp"
+       data-wow-delay="0"
+       data-wow-duration="350ms"
+  >
+    <button
+      class="wow fadeInLeft"
+      mat-icon-button
+      *ngIf="previousLink"
+      [routerLink]="previousLink"
+      data-wow-delay="250ms"
+      data-wow-duration="350ms"
+    >
+      <material-icon name="keyboard_backspace" class="text-dark"></material-icon>
+    </button>
+    <span
+      id="title"
+    >{{title}}</span>
+    <sub
+      id="subtitle"
+      class="wow bounceIn"
+      data-wow-delay="500ms"
+      data-wow-duration="500ms"
+    >{{subtitle}}</sub>
+  </div>
+  <mat-spinner [diameter]="30" *ngIf="loading"></mat-spinner>
+</div>

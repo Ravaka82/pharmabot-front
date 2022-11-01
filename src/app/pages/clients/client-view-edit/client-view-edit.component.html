@@ -1,0 +1,73 @@
+<div class="container">
+  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="14px">
+    <app-page-title previousLink="/clients" title="{{isUpdate ? 'Mis à jour' : 'Ajout' }} client" [loading]="loading"></app-page-title>
+  </div>
+  <div class="content">
+    <div class="forms">
+      <div class="lottie-paper">
+        <ng-lottie [options]="options"></ng-lottie>
+      </div>
+      <form
+        fxLayout="column"
+        [formGroup]="clientForm"
+        (submit)="submit()"
+        class="wow fadeInRight"
+        data-wow-duration="500ms"
+      >
+        <mat-form-field appearance="outline">
+          <mat-label>Nom</mat-label>
+          <input type="text" matInput formControlName="name" autocomplete="off">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Adresse</mat-label>
+          <input type="text" matInput formControlName="address" autocomplete="off">
+        </mat-form-field>
+        <div fxLayout="row" fxLayoutGap="8px">
+          <mat-form-field appearance="outline">
+            <mat-label>Ville</mat-label>
+            <input type="text" matInput formControlName="city" autocomplete="off">
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Code postal</mat-label>
+            <input type="text" matInput formControlName="zip" autocomplete="off">
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Pays</mat-label>
+            <input type="text" matInput formControlName="country" autocomplete="off">
+          </mat-form-field>
+        </div>
+        <div fxLayout="row" fxLayoutGap="8px">
+          <mat-form-field appearance="outline">
+            <mat-label>NIF</mat-label>
+            <input type="text" mask="00 00 00 00 00" maxlength="14" matInput formControlName="nif" autocomplete="off">
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>STAT</mat-label>
+            <input type="text" matInput mask="00000 00 0000 0 00000" formControlName="stat" autocomplete="off">
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>RCS</mat-label>
+            <input type="text" matInput formControlName="rcs" autocomplete="off">
+          </mat-form-field>
+        </div>
+        <div fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="start center">
+          <mat-form-field appearance="outline">
+            <mat-label>N° Téléphone bureau</mat-label>
+            <input type="text" matInput prefix="+261" mask=" 00 00 000 00" maxlength="17" placeholder="261 3X XXX XX" formControlName="officeNumber" autocomplete="off">
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>N° Téléphone</mat-label>
+            <input type="text" matInput prefix="+261" mask=" 00 00 000 00" maxlength="17" placeholder="261 3X XXX XX" formControlName="phoneNumber" autocomplete="off">
+          </mat-form-field>
+        </div>
+        <p>
+          <mat-error>{{errorMessage}}</mat-error>
+        </p>
+        <button mat-raised-button color="primary" type="submit" [disabled]="clientForm.invalid || loading">
+          <span>Enregister</span>
+          <mat-progress-bar mode="indeterminate" *ngIf="submitting"></mat-progress-bar>
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,102 @@
+<div class="container" *ngIf="!(isMobile$ | async)">
+  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="14px">
+    <app-page-title title="Facturation" [subtitle]="accountCatalogueGroupeName" [loading]="loading || isDeleting"></app-page-title>
+  </div>
+  <div class="content">
+    <div class="toolbar-custom" *ngIf="isAuthorized">
+      <button mat-button routerLink="/facturation/new">
+        <div fxLayoutAlign="center">
+          <material-icon name="add"></material-icon>
+          <span>Créer une facture</span>
+        </div>
+      </button>
+    </div>
+    <ngx-datatable
+      #table
+      class="material"
+      [columns]="columns"
+      [columnMode]="ColumnMode.flex"
+      [headerHeight]="50"
+      [rowHeight]="45"
+      [rows]="rows"
+      [footerHeight]="50"
+      [scrollbarV]="true"
+    >
+    </ngx-datatable>
+  </div>
+</div>
+
+<app-facture-mobile-view
+  *ngIf="(isMobile$ | async)"
+  [rows]="rows"
+  [isAuthorized]="isAuthorized"
+></app-facture-mobile-view>
+
+<ng-template let-row="row" #detail>
+  <button mat-icon-button (click)="openDetail(row)">
+    <material-icon name="receipt"></material-icon>
+  </button>
+</ng-template>
+
+<ng-template let-row="row" #referenceTemplate>
+  {{row.reference | mask: 'SSS/0000/0*'}}
+</ng-template>
+
+<ng-template let-row="row" #statut>
+  <div class="status" [ngClass]="getStatut(row.status).color">
+    {{getStatut(row.status).label}}
+  </div>
+</ng-template>
+
+<ng-template let-row="row" #receivedTemplate>
+  <button mat-flat-button [disabled]="!!row.receivedByInput" color="primary" *ngIf="!row.receivedBy && isAuthorized" (click)="row.receivedByInput = true">Mettre à jour</button>
+  <div *ngIf="row.receivedBy">
+    <span>{{row.receivedAt | date: 'dd/MM/YY à HH:mm'}}</span>
+  </div>
+</ng-template>
+
+<ng-template let-row="row" #receivedByTemplate>
+  <div *ngIf="!row.receivedBy && row.receivedByInput" fxLayout="row" fxLayoutAlign="center center">
+    <mat-form-field>
+      <input type="text" matInput autocomplete="off" [(ngModel)]="row.receivedByUpdate">
+    </mat-form-field>
+    <button mat-icon-button (click)="updateReceivedBy(row._id, row.receivedByUpdate)">
+      <material-icon name="check_circle"></material-icon>
+    </button>
+    <button mat-icon-button (click)="row.receivedByInput = false" color="warn">
+      <material-icon name="close"></material-icon>
+    </button>
+  </div>
+
+  <span *ngIf="row.receivedBy">{{row.receivedBy}}</span>
+</ng-template>
+
+<ng-template let-row="row" #paidTemplate>
+  <button mat-flat-button color="primary" *ngIf="!row.paidAt && isAuthorized" [disabled]="!row.receivedBy || row.status === 'WAITING'" (click)="updatePaid(row._id)">
+    Mettre à jour
+  </button>
+  <div *ngIf="row.paidAt">
+    <span>{{row.paidAt | date: 'dd/MM/YY à HH:mm'}}</span>
+  </div>
+</ng-template>
+
+<ng-template let-row="row" #payAvailableTemplate>
+  <button
+    *ngIf="!row.payAvailableAt && !isAuthorized"
+    [disabled]="row.status === 'CREATED'"
+    (click)="updateAvailableAt(row._id)"
+    [matTooltip]="'Cliquer ici si le chèque est prêt'"
+    mat-flat-button color="primary"
+  >
+    Chèque dispo.
+  </button>
+  <div *ngIf="row.payAvailableAt && (row.status === 'PAY_AVAILABLE' || row.status === 'PAID')">
+    <span>{{row.payAvailableAt | date: 'dd/MM/YY à HH:mm'}}</span>
+  </div>
+</ng-template>
+
+<ng-template let-row="row" #deleteTemplate>
+  <button mat-icon-button color="warn" (click)="deleteFacture(row)">
+    <material-icon name="close"></material-icon>
+  </button>
+</ng-template>

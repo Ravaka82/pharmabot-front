@@ -1,0 +1,21 @@
+<div class="chat-list-body">
+  <button mat-button class="bg-gray" id="add-groupe-btn" (click)="addGroupe()">
+    <mat-icon>add</mat-icon>
+    Créez un groupe
+  </button>
+
+
+  <mat-selection-list #pharmabooker [multiple]="false">
+    <mat-list-option *ngFor="let groupe of groupes" [value]="groupe">
+      <div mat-list-icon class="mat-list-icon">
+        <ngx-avatar [name]="groupe.pseudo" size="40"></ngx-avatar>
+      </div>
+      <div mat-line fxLayout="row">
+        <span>{{groupe.pseudo}}</span>
+        <span class="timestamp-message">{{groupe.createdAt | date: 'dd/MM/yyyy'}}</span>
+      </div>
+      <div mat-line class="preview-message"> {{groupe?.previewMessage}} </div>
+    </mat-list-option>
+  </mat-selection-list>
+
+</div>

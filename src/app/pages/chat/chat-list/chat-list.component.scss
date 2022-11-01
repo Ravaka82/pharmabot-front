@@ -1,0 +1,51 @@
+@import "../../../../theme";
+
+app-chat-list {
+  #chat-container {
+    height: 100%;
+  }
+  margin-left: .25em;
+
+  .chat-list-header {
+    padding: 1em 2em;
+    position: relative;
+    background-color: $gray-color;
+    border-bottom: 1px solid #c0c0c0;
+
+    app-search {
+      .search {
+        width: auto !important;
+        border-color: #c0c0c0
+      }
+    }
+  }
+
+  .chat-list-body {
+    overflow: auto;
+    .preview-message, .timestamp-message {
+      color: #8d8d8d
+    }
+  }
+
+  .timestamp-message {
+    margin-left: auto;
+    font-size: .85em
+  }
+
+  .mat-list-icon {
+    width: 45px !important;
+    height: 45px !important;
+    position: relative;
+    mat-icon {
+      position: absolute !important;
+      font-size: .6em !important;
+      right: 0;
+      bottom: -5px;
+      background-color: white;
+      border-radius: 50% 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}

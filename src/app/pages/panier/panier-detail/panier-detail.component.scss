@@ -1,0 +1,39 @@
+.note {
+    color: grey;
+    font-size: 12px;
+    margin-top: 1em;
+  }
+  
+  h2, h3, p {
+    margin: 0;
+  }
+  
+  .h-dashed {
+    border: 1px dashed black;
+    margin: 1em 0;
+  }
+  
+  table {
+    margin-top: 2em;
+    width: 100%;
+    border-spacing: 0;
+    thead {
+      background-color: black;
+      th {padding: .5em;
+        color: white;
+        text-align: left !important;
+      }
+    }
+    tbody {
+      td {
+        border: 1px solid #eaeaea;
+        padding: .5em;
+      }
+    }
+    .total {
+      td {
+        padding: 1em;
+      }
+    }
+  }
+  

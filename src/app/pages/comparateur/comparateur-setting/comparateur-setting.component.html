@@ -1,0 +1,63 @@
+<div class="toolbar-custom">
+  <button mat-button (click)="addFournisseur()">
+    <div fxLayoutAlign="center">
+      <material-icon name="add"></material-icon>
+      <span>Ajouter</span>
+    </div>
+  </button>
+</div>
+<div class="content">
+  <ngx-datatable
+    #table
+    class="material"
+    [columns]="columns"
+    [columnMode]="ColumnMode.force"
+    [headerHeight]="50"
+    [rowHeight]="45"
+    [rows]="rows"
+    [scrollbarV]="true"
+    [footerHeight]="50"
+  >
+  </ngx-datatable>
+</div>
+
+<ng-template let-row="row" #couleur>
+  <ngx-colors ngx-colors-trigger
+              [colorsAnimation]="'popup'"
+              [hideColorPicker]="true"
+              [hideTextInput]="true"
+              [(ngModel)]="row.couleur"
+              (input)="couleurChange(row)"
+  ></ngx-colors>
+</ng-template>
+
+<ng-template let-row="row" #remise>
+  <app-input-editable
+    yyInputEditable
+    [row]="row"
+    type="number"
+    key="remise"
+    [step]=".25"
+    (keyEnter)="updateRemise(row)"
+  ></app-input-editable>
+</ng-template>
+
+<ng-template let-row="row" #fournisseurTemplate>
+  <mat-select
+    #frs
+    [(value)]="row.fournisseur._id"
+    (valueChange)="fournisseurChange(row, frs.value)"
+    class="label-frs"
+    [style.background-color]="row.couleur"
+    [class.text-white]="row.couleurText === 'text-white'"
+    [class.text-dark]="row.couleurText === 'text-dark'"
+  >
+    <mat-option *ngFor="let fournisseur of fournisseurs$ | async" [value]="fournisseur._id">{{fournisseur.name}}</mat-option>
+  </mat-select>
+</ng-template>
+
+<ng-template let-row="row" #action>
+  <button mat-icon-button color="warn" (click)="deleteFournisseur(row)">
+    <material-icon name="clear"></material-icon>
+  </button>
+</ng-template>

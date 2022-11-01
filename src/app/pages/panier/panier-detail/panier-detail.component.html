@@ -1,0 +1,79 @@
+
+<div id="print" #pdf>
+    <div>
+        <div fxLayout="row">
+          <div fxFlex="1 1 50%" class="facturation-sender">
+            <div>
+                <h3>YOUNGDEV</h3>
+                <p>Lot III E 22 Ankazomanga</p>
+                <p>Antananarivo 101, Madagascar</p>
+                <p>NIF 3003470254</p>
+                <p>STAT 63122 11 2019 0 04999</p>
+                <p>Antananarivo 2020 A 00195</p>
+                <p>+261 34 84 332 26</p>
+                <p>+261 34 86 663 50</p> 
+              </div>
+          </div>
+          <div fxLayout="column" fxLayoutGap="28px" fxLayoutAlign="center flex-end" class="text-right only-desktop">
+            <span>Bon de Commande N° <b> 001 </b></span>
+            <img src="assets/svg/youngdev.svg" width="150" alt="logo youngdev">
+          </div>
+        </div>
+        <div>
+          <h2>Destination</h2>
+          <p>PHARMALIFE</p>
+          <p>Antananarivo 101, Madagascar</p>
+          <p>+261 33 15 645 40</p>
+        </div>
+      </div>
+      <table>
+        <thead>
+        <th>Designation</th>
+        <th class="text-center">date_expiration</th>
+        <th class="text-center">quantité</th>
+        <th class="text-center">prix(AR)</th>
+        <th class="text-center">total(AR)</th>
+        </thead>
+        <tbody>
+        <tr *ngFor="let item of data">
+          <td>{{item.designation}}</td>
+          <td>{{item.date_expiration}}</td>
+          <td>{{item.cart_count |  number: "1.0-0" }}</td>
+          <td>{{item.prix |  number: "1.0-0" }}</td>
+          <td>{{item.prix* item.cart_count  |  number: "1.0-0" }}</td>
+        </tr>
+        </tbody>
+        <tfoot>
+        </tfoot>
+      </table>
+      <br>
+      <div>
+        <div>
+          <span>Arrêté à la somme de <em>{{readTotalToText()}}</em> Ariary</span>
+        </div>
+      </div>
+      <br>
+      <div fxLayout="column" fxLayoutGap="28px" fxLayoutAlign="center flex-end" class="text-right only-desktop">
+        <span>Total à payer :<b> AR {{sommeTotal}}</b></span>
+      </div>
+      <br>
+      <div fxLayoutAlign="flex-end" fxLayoutGap="14px">
+        <button mat-icon-button
+                class="bg-dark only-desktop"
+                printSectionId="print"
+                ngxPrint
+                [useExistingCss]="true"
+                [printStyle]="{
+                  body: {
+                    width: '555px'
+                  },
+                  '.only-mobile': {
+                    display: 'none !important'
+                  }
+                }"
+        >
+          <material-icon name="print"></material-icon>
+        </button>
+        <button mat-flat-button color="warn" mat-dialog-close >Fermer</button>
+      </div>
+      

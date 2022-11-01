@@ -1,0 +1,46 @@
+<div class="container">
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="14px">
+      <app-page-title previousLink="/bon-de-commande" title="{{isUpdate ? 'Mis à jour' : 'Ajout' }} bon de commande" [loading]="loading"></app-page-title>
+    </div>
+    <div class="content">
+      <div class="forms">
+        <div class="lottie-paper">
+          <ng-lottie [options]="options"></ng-lottie>
+        </div>
+        <form
+          fxLayout="column"
+          [formGroup]="bonDeCommandeForm"
+          (submit)="submit()"
+          class="wow fadeInRight"
+          data-wow-duration="500ms"
+        >
+        <mat-form-field appearance="outline">
+            <mat-label>Groupe</mat-label>
+            <mat-select formControlName="fournisseur">
+              <mat-option *ngFor="let fournisseur of fournisseurs" [value]="fournisseur._id">{{fournisseur.name}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Rôle</mat-label>
+            <mat-select formControlName="archive">
+              <mat-option *ngFor="let archive of archives" [value]="archive._id">{{archive.designation}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <div fxLayout="row">
+            <mat-form-field appearance="outline">
+              <mat-label>quantite</mat-label>
+              <input type="text" matInput formControlName="quantite" autocomplete="off">
+            </mat-form-field>
+          </div>
+          <p>
+            <mat-error>{{errorMessage}}</mat-error>
+          </p>
+          <button mat-raised-button color="primary" type="submit" [disabled]="bonDeCommandeForm.invalid || loading">
+            <span>Enregister</span>
+            <mat-progress-bar mode="indeterminate" *ngIf="submitting"></mat-progress-bar>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+  

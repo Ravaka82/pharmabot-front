@@ -1,0 +1,48 @@
+<div class="container" *ngIf="!(isMobile$ | async)">
+  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="14px">
+    <app-page-title title="Comparateur" [loading]="loading"></app-page-title>
+    <span class="mr-auto"></span>
+    <app-search
+      *ngIf="group.selectedIndex === 1"
+      class="wow fadeInRight"
+      data-wow-delay="1000ms"
+      data-wow-duration="350ms"
+      (search)="searchValue = $event"
+    ></app-search>
+  </div>
+  <div class="content">
+    <mat-tab-group #group (selectedIndexChange)="selectedIndex = $event">
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <div fxLayoutGap="8px" fxLayoutAlign="center">
+            <material-icon name="settings"></material-icon>
+            <span>Paramètre</span>
+          </div>
+        </ng-template>
+         <app-comparateur-setting
+            [rows]="(comparateurSettings$ | async) || []"
+         ></app-comparateur-setting>
+      </mat-tab>
+
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <div fxLayoutGap="8px" fxLayoutAlign="center">
+            <material-icon name="compare_arrows"></material-icon>
+            <span>Comparer</span>
+          </div>
+        </ng-template>
+        <app-comparateur-search
+          [selectedIndex]="selectedIndex"
+          [search]="searchValue"
+          [settings]="(comparateurSettings$ | async)|| []"
+        ></app-comparateur-search>
+      </mat-tab>
+
+    </mat-tab-group>
+  </div>
+</div>
+
+<app-comparateur-mobile-view
+  *ngIf="(isMobile$ | async)"
+  [settings]="(comparateurSettings$ | async) || []"
+></app-comparateur-mobile-view>

@@ -1,0 +1,75 @@
+<div class="toolbar-custom" fxLayoutGap="25px">
+  <mat-checkbox color="primary" [(ngModel)]="showPanier" (ngModelChange)="toolbarMenuValueChanged()">
+    <span>Afficher le panier</span>
+  </mat-checkbox>
+  <mat-checkbox color="primary" [(ngModel)]="isRemise" (ngModelChange)="toolbarMenuValueChanged()">
+    <span>Prix d'achat {{ isRemise ? 'rémisé' : 'non rémisé' }}</span>
+  </mat-checkbox>
+  <div class="custom-input">
+    <mat-checkbox  color="primary" [(ngModel)]="isTva" (ngModelChange)="toolbarMenuValueChanged()">
+      <span class="label">TVA </span>
+      <input type="number" step="0.25" [(ngModel)]="TVA" min="1" (ngModelChange)="toolbarMenuValueChanged()">
+    </mat-checkbox>
+  </div>
+  <div class="custom-input">
+    <mat-checkbox  color="primary" [checked]="true" [disabled]="true">
+      <span class="label">Prix de vente </span>
+      <input type="number" step="0.25" [(ngModel)]="PV" min="1" (ngModelChange)="toolbarMenuValueChanged()">
+    </mat-checkbox>
+  </div>
+
+</div>
+<mat-progress-bar mode="indeterminate" *ngIf="isDataLoading"></mat-progress-bar>
+<ngx-datatable
+  #table
+  class="material"
+  [columns]="columns"
+  [columnMode]="ColumnMode.flex"
+  [headerHeight]="50"
+  [rowHeight]="45"
+  [rows]="rows"
+  [scrollbarV]="true"
+  [footerHeight]="50"
+  [messages]="{emptyMessage: 'Aucune ligne à afficher. Veuillez saisir différent nom d\'un produit sur la barre de recherche en haut.'}"
+>
+</ngx-datatable>
+
+<ng-template let-row="row" #designationTpl>
+  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px" class="designation-container" [attr.data-checked]="row.cart_added">
+    <span class="designation-label" fxFlex="85%">{{row.designation}}</span>
+    <div fxFlex="auto" class="designation-cart" *ngIf="showPanier">
+      <input type="number" step="1" min="1" [value]="row.cart_count || 1" #cart_count (change)="row.cart_added = false">
+      <button mat-icon-button (click)="upsertItemCart(row, cart_count.value)" *ngIf="!row.cart_added">
+        <img src='assets/svg/ajout.png'  style=" transform: rotate(330deg)" width="36">
+        <!-- <span class="material-icons" style="color: red; transform: rotate(342deg); font-size: 24px;">local_grocery_store</span> -->
+      </button>
+      <button mat-icon-button (click)="removeItemCart(row)" *ngIf="row.cart_added">
+        <img src='assets/svg/remove.png' width="36">
+      </button>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template let-row="row" #paTpl>
+  <div class="chip-item"
+       [style.background-color]="row.couleur"
+       [class.text-light]="row.couleurText === 'text-white'"
+       [class.text-dark]="row.couleurText === 'text-dark'"
+  >{{computePrixAchat(row) | number: '1.0-0'}}</div>
+</ng-template>
+
+<ng-template let-row="row" #frsTpl>
+  <div class="chip-item"
+       [style.background-color]="row.couleur"
+       [class.text-light]="row.couleurText === 'text-white'"
+       [class.text-dark]="row.couleurText === 'text-dark'"
+  >{{row.fournisseur}}</div>
+</ng-template>
+
+<ng-template let-row="row" #pvTpl>
+  <div class="chip-item"
+       [style.background-color]="row.couleur"
+       [class.text-light]="row.couleurText === 'text-white'"
+       [class.text-dark]="row.couleurText === 'text-dark'"
+  >{{computePrixVente(row) | number: '1.0-0'}}</div>
+</ng-template>

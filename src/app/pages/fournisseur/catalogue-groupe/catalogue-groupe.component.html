@@ -1,0 +1,37 @@
+<div class="toolbar-custom">
+  <button mat-button (click)="addGroup()">
+    <div fxLayoutAlign="center">
+      <material-icon name="add"></material-icon>
+      <span>Ajouter une groupe</span>
+    </div>
+  </button>
+</div>
+<ngx-datatable
+  class="material"
+  [columns]="columns"
+  [columnMode]="ColumnMode.standard"
+  [headerHeight]="50"
+  [footerHeight]="50"
+  [rowHeight]="45"
+  [rows]="rows"
+  [scrollbarV]="true"
+  [rowClass]="getRowClass"
+  [selected]="rowSelected"
+  [selectionType]="SelectionType.single"
+  (select)="selectedRow()"
+>
+</ngx-datatable>
+
+<ng-template let-row="row" #activeTemplate>
+  <mat-slide-toggle [checked]="row?.active" [(ngModel)]="row.active" (change)="saveUpdate(row)"></mat-slide-toggle>
+</ng-template>
+
+<ng-template let-row="row" #groupTemplate>
+  <app-input-editable (change)="saveUpdate(row)" yyInputEditable [row]="row" type="text" key="name"></app-input-editable>
+</ng-template>
+
+<ng-template let-row="row" #actionTemplate>
+  <button mat-icon-button color="warn" (click)="deleteGroup(row)">
+    <material-icon name="clear"></material-icon>
+  </button>
+</ng-template>

@@ -1,0 +1,31 @@
+app-fournisseur {
+  .container {
+    position: relative;
+    .mat-display-1 {
+      margin-bottom: .65em !important;
+    }
+
+    .checkbox {
+      margin-left: 1em;
+    }
+
+    .content {
+      ngx-datatable {
+        box-shadow: none;
+        height: calc(100vh - 250px) !important;
+      };
+      display: flex;
+      column-gap: 2.5%;
+    }
+
+    .mat-display-1 {
+      margin-bottom: .65em;
+    }
+
+    .toolbar-custom {
+      .label {
+        margin-left: 1em;
+      }
+    }
+  }
+}

@@ -1,0 +1,15 @@
+<div class="container wow fadeInUp" fxLayout="column" fxLayoutAlign="center center" data-wow-delay="0ms" data-wow-duration="600ms">
+  <span class="mat-display-1 text-center">Que puis-je faire pour vous?</span>
+  <p class="text-center">Sélectionner <b>Catalogue</b> pour ajouter ou voir vos catalogues fournisseurs.</p>
+  <p class="text-center">Choisissez <b>Comparateur</b> pour commmencer à comparer des catalogues fournisseurs.</p>
+  <div id="card-container" fxLayout="row" fxLayoutGap="2em">
+    <div class="card" fxLayout="column" fxLayoutAlign="center center"
+         *ngFor="let card of cards"
+         [routerLink]="card.path"
+         mat-ripple
+    >
+      <div class="card-icon"><material-icon [name]="card.icon"></material-icon></div>
+      <div class="card-title">{{card.label}}</div>
+    </div>
+  </div>
+</div>

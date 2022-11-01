@@ -1,0 +1,57 @@
+<div fxLayout="column" fxLayoutGap="40px">
+  <div fxLayout="row" fxLayoutAlign="start center">
+    <span class="spacer mr-auto"></span>
+    <button mat-icon-button  mat-dialog-close>
+      <material-icon name="close"></material-icon>
+    </button>
+  </div>
+  <div mat-dialog-content fxLayout="row" fxLayoutGap="42px">
+    <div fxLayoutAlign="center center" fxLayout="column">
+      <div fxLayoutAlign="center center" fxLayout="column" class="wow fadeInUp" data-wow-delay="0ms" data-wow-duration="500ms">
+        <h1>Utilisateur</h1>
+        <p class="text-secondary wow fadeInUp" data-wow-delay="0ms" data-wow-duration="750ms">Ajout / Modification</p>
+      </div>
+      <div class="lottie-user">
+        <ng-lottie [options]="options" width="200px"></ng-lottie>
+      </div>
+    </div>
+    <div class="forms">
+      <form fxLayout="column" [formGroup]="userForm" (submit)="submit()">
+        <mat-form-field appearance="outline">
+          <mat-label>Pseudo</mat-label>
+          <input type="text" matInput formControlName="pseudo" autocomplete="off">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Mot de passe</mat-label>
+          <input [attr.type]="showPassword ? 'text' : 'password'" matInput formControlName="password">
+          <button mat-icon-button
+                  matSuffix
+                  type="button"
+                  (click)="showPassword = !showPassword"
+          >
+            <material-icon [name]="!showPassword ? 'visibility_off' : 'visibility'"></material-icon>
+          </button>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Groupe</mat-label>
+          <mat-select formControlName="catalogueGroupe">
+            <mat-option *ngFor="let catalogueGroupe of catalogueGroupes" [value]="catalogueGroupe._id">{{catalogueGroupe.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Rôle</mat-label>
+          <mat-select formControlName="role">
+            <mat-option *ngFor="let role of roles" [value]="role._id">{{role.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <p>
+          <mat-error>{{errorMessage}}</mat-error>
+        </p>
+        <button mat-raised-button color="primary" type="submit" [disabled]="userForm.invalid || loading">
+          <span>Enregister</span>
+          <mat-progress-bar mode="indeterminate" *ngIf="submitting"></mat-progress-bar>
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

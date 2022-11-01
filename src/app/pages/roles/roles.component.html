@@ -1,0 +1,16 @@
+<div class="container">
+  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="14px">
+    <app-page-title [loading]="!!(loading$ | async)" title="Rôles"></app-page-title>
+  </div>
+  <div class="content">
+    <div class="container-grid">
+      <div class="grid">
+        <app-role-name></app-role-name>
+      </div>
+    </div>
+    <div class="grid" id="role-list">
+      <app-role-page-list></app-role-page-list>
+    </div>
+  </div>
+</div>
+

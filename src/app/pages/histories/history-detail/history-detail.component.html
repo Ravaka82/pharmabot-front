@@ -1,0 +1,41 @@
+<div fxLayout="row" fxLayoutAlign="start center">
+  <h1>Logs</h1>
+  <span class="spacer mr-auto"></span>
+  <button mat-icon-button  mat-dialog-close>
+    <material-icon name="close"></material-icon>
+  </button>
+</div>
+<div class="history-detail-container">
+  <div fxLayout="row" fxLayoutAlign="space-between">
+    <table fxLayoutAlign="end center">
+      <tbody>
+      <tr>
+        <td><b>Action</b></td>
+        <td>{{data.action}}</td>
+      </tr>
+      <tr>
+        <td><b>Date</b></td>
+        <td>{{data.createdAt | date: 'dd MMM YYYY'}}</td>
+      </tr>
+      <tr>
+        <td><b>Heure</b></td>
+        <td>{{data.createdAt | date: 'hh:mm:ss'}}</td>
+      </tr>
+      <tr *ngIf="data.user">
+        <td><b>Utilisateur</b></td>
+        <td>{{data.user?.pseudo}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div *ngIf="data.metadata" fxLayout="row" fxLayoutGap="8px" class="code">
+    <div class="code-block">
+      <h4 fxLayoutAlign="center">INPUT</h4>
+      <ngx-json-viewer [json]="data.metadata?.input"></ngx-json-viewer>
+    </div>
+    <div class="code-block">
+      <h4 fxLayoutAlign="center">OUTPUT</h4>
+      <ngx-json-viewer [json]="data.metadata?.output"></ngx-json-viewer>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,34 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <h1>Nouveau Message</h1>
+  <form class="example-form"  [formGroup]="nomForm"  (ngSubmit)="onSubmit()">
+      <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label><img src='assets/svg/fournisseur.png' width="20"> Destinataire</mat-label>
+          <input matInput placeholder="Exemple@gmail.com" formControlName="to">
+      </mat-form-field>
+      <br>
+      <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Object</mat-label>
+          <input matInput placeholder="" formControlName="subject">
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+          <img src='assets/svg/pencil.png' width="32">
+          <textarea matInput placeholder="" formControlName="text" style="line-height: 100px !important;" ></textarea>
+      </mat-form-field>
+        <br>
+        <!-- <button  mat-raised-button type="submit" class="file-input"  fxLayoutGap="12px">
+          <input type="file" formControlName="filename" class="file">
+        </button> -->
+          <div class="fileUploadInput">
+          <label>✨ Upload Fichier</label>
+          <input type="file"  formControlName="file"  (change)="onFileChange($event)"/>
+          <button ><img src='assets/svg/i.png' width="36"></button></div>
+       <br><br>
+      <button  mat-raised-button type="submit" class ="but" color="Link">
+        <img src='assets/svg/send.png' width="32">
+        <span> Envoyer </span>
+      </button>
+      <mat-progress-bar mode="indeterminate"*ngIf="submitting"></mat-progress-bar>
+  </form>
+  <div fxLayoutAlign="flex-end" fxLayoutGap="14px">
+      <button mat-flat-button color="warn" mat-dialog-close >Fermer</button>
+  </div>

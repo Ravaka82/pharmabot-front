@@ -1,0 +1,131 @@
+<!--<div class="container">-->
+<!--  <div class="row">-->
+<!--    <div class="col text-right p-3">-->
+<!--      <button class="btn btn-dark" (click)="exportPDF('print')">Export PDF</button>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+<div id="print" #pdf>
+  <div>
+    <div fxLayout="row">
+      <div fxFlex="1 1 50%" class="facturation-sender">
+        <div>
+          <h3>{{data?.sender?.name}}</h3>
+          <p>{{data?.sender?.address}}</p>
+          <p>{{data?.sender?.city + ' ' + data?.sender?.zip + ', ' + data?.sender?.country}}</p>
+          <p>NIF {{data?.sender?.nif}}</p>
+          <p>STAT {{(data?.sender?.stat || '') | mask: '00000 00 0000 0 00000'}}</p>
+          <p>{{data?.sender?.rcs}}</p>
+          <p *ngIf="data?.sender?.officeNumber">+261 {{(data?.sender?.officeNumber || '' | mask: '00 00 000 00')}}</p>
+          <p *ngIf="data?.sender?.phoneNumber">+261 {{(data?.sender?.phoneNumber || '' | mask: '00 00 000 00')}}</p>
+        </div>
+      </div>
+      <div fxLayout="column" fxLayoutGap="28px" fxLayoutAlign="center flex-end" class="text-right only-desktop">
+        <span>Facture N° <b>{{(data.reference || '') | mask: 'SSS/0000/0*'}}</b></span>
+        <img src="assets/svg/youngdev.svg" width="150" alt="logo youngdev">
+        <!--      <p>{{body?.bills.createdAt | date: 'dd MMMM yyyy'}}</p>-->
+      </div>
+    </div>
+    <!--    <div class="offset-lg-1 col-lg-6 flex-center" style="height: 250px;">-->
+    <!--      <img [src]="logoURL" width="175px" style="margin-bottom: 80px; margin-right: 90px" alt="">-->
+    <!--    </div>-->
+    <div>
+      <h2>Destination</h2>
+      <h3>{{data?.receiver?.name | uppercase}}</h3>
+      <p>{{data?.receiver?.address}}</p>
+      <p>{{data?.receiver?.city + ' ' + data?.receiver?.zip + ', ' + data?.receiver?.country}}</p>
+      <p *ngIf="data?.receiver?.nif">NIF {{data?.receiver?.nif}}</p>
+      <p *ngIf="data?.receiver?.stat">STAT {{data?.receiver?.stat}}</p>
+      <p *ngIf="data?.receiver?.rcs">RCS {{data?.receiver?.rcs}}</p>
+      <p *ngIf="data?.receiver?.officeNumber">+261 {{(data?.receiver?.officeNumber || '' | mask: '00 00 000 00')}}</p>
+      <p *ngIf="data?.receiver?.phoneNumber">+261 {{(data?.receiver?.phoneNumber || '' | mask: '00 00 000 00')}}</p>
+    </div>
+  </div>
+  <div>
+    <div>
+      <table>
+        <thead>
+        <th>Designation</th>
+        <th class="text-center">Qté.</th>
+        <th class="text-center">PU</th>
+        <th class="text-center">Total</th>
+        </thead>
+        <tbody>
+        <tr *ngFor="let item of data?.facturation">
+          <td>{{item.designation}}</td>
+          <td>{{item.quantity |  number: "1.0-0" }}</td>
+          <td>{{item.price |  number: "1.0-0" }}</td>
+          <td>{{item.price * item.quantity |  number: "1.0-0" }}</td>
+        </tr>
+        </tbody>
+        <tfoot>
+        <tr class="total">
+          <td></td>
+          <td colspan="2" class="text-right">Total dû</td>
+          <td>{{getTotal() | number: "1.0-0"}}</td>
+        </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+  <div>
+    <div>
+      <span>Arrêté à la somme de <em>{{readTotalToText()}}</em> Ariary</span>
+    </div>
+  </div>
+  <div fxLayout="row">
+    <div class="note" fxFlex="1 1 65%">
+      <span><i>** Pour plus d'information sur la facture,</i></span>
+      <span><i>Veuillez contacter le <b>0{{(data?.sender?.phoneNumber  || '') | mask: '00 00 000 00'}}</b> de 08h à 17h.</i></span>
+    </div>
+    <div fxFlex="1 1 35%" fxLayoutAlign="flex-end start" class="only-desktop">
+      <img [src]="data?.qrcode" width="150px">
+    </div>
+  </div>
+  <div class="h-dashed"></div>
+  <div class="footer-cut">
+    <div>
+      <div fxLayout="row" fxLayoutGap="14px">
+        <div fxFlex="1 1 33%" class="only-desktop">
+          <img [src]="data?.qrcode" width="125px">
+        </div>
+        <div fxFlex="1 1 33%" class="only-mobile">
+          <img src="assets/svg/youngdev.svg" width="125px">
+        </div>
+        <div fxLayout="column" fxLayoutGap="16px">
+          <p>Facture N° <span><b>{{(data.reference || '') | mask: 'SSS/0000/0*'}}</b></span></p>
+          <p>Reçu par {{data?.receivedBy}}</p>
+          <p>Le {{data?.receivedAt | date: 'dd/MM/YY'}}</p>
+        </div>
+        <div fxLayoutAlign="center start" fxFlex="1 1 20%" class="only-desktop">
+          <span>Signature</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div fxLayoutAlign="flex-end">
+    <!--    <button mat-flat-button color="accent">-->
+    <!--      <material-icon name="print"></material-icon>-->
+    <!--      <span>Imprimer</span>-->
+    <!--    </button>-->
+  </div>
+</div>
+<div fxLayoutAlign="flex-end" fxLayoutGap="14px">
+  <button mat-icon-button
+          class="bg-dark only-desktop"
+          printSectionId="print"
+          ngxPrint
+          [useExistingCss]="true"
+          [printStyle]="{
+            body: {
+              width: '555px'
+            },
+            '.only-mobile': {
+              display: 'none !important'
+            }
+          }"
+  >
+    <material-icon name="print"></material-icon>
+  </button>
+  <button mat-flat-button color="warn" mat-dialog-close *ngIf="!data?.hideFooterCut">Fermer</button>
+</div>

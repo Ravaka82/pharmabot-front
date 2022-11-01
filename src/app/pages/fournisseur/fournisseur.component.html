@@ -1,0 +1,10 @@
+<div class="container">
+  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="14px">
+    <app-page-title [loading]="!!(loading$ | async)" title="Fournisseurs"></app-page-title>
+  </div>
+  <div class="content">
+    <app-catalogue-groupe class="grid" id="catalogue-groupe" fxFlex="58%"></app-catalogue-groupe>
+    <app-fournisseur-entity class="grid" id="fournisseur" fxFlex="40%"></app-fournisseur-entity>
+  </div>
+</div>
+

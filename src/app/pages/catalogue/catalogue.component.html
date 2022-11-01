@@ -1,0 +1,43 @@
+<div class="container" *ngIf="!(isMobile$ | async)">
+  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="14px">
+    <app-page-title title="Catalogue"></app-page-title>
+    <span class="mr-auto"></span>
+    <app-search
+      class="wow fadeInRight"
+      data-wow-delay="500ms"
+      data-wow-duration="350ms"
+      (search)="onSearch($event)"
+    ></app-search>
+  </div>
+  <div class="content">
+    <ngx-datatable
+      #table
+      class="material"
+      [columns]="columns"
+      [columnMode]="ColumnMode.force"
+      [headerHeight]="50"
+      [footerHeight]="50"
+      [rowHeight]="45"
+      [rows]="rows"
+      [scrollbarV]="true"
+    >
+    </ngx-datatable>
+  </div>
+</div>
+
+<app-catalogue-mobile-view
+  *ngIf="isMobile$ | async"
+  [rows]="rows"
+  (search)="onSearch($event)"
+>
+</app-catalogue-mobile-view>
+
+
+<ng-template let-row="row" #importTpl>
+  <button mat-button (click)="openImportCatalogue(row.name)">
+    <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="8px">
+      <material-icon name="cloud_upload"></material-icon>
+      <span>Importer</span>
+    </div>
+  </button>
+</ng-template>

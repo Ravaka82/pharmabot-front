@@ -1,0 +1,24 @@
+<div *ngIf="row?.isEditable">
+  <div [ngSwitch]="type">
+      <input
+       *ngSwitchCase="'text'"
+       class="table-input"
+       type="text"
+       #input
+       [value]="input.value"
+       [(ngModel)]="row[key]"
+       (ngModelChange)="valueChange.next(row[key])"
+      />
+    <input
+      *ngSwitchCase="'number'"
+      class="table-input"
+      type="number"
+      [(ngModel)]="row[key]"
+      [max]="max"
+      [min]="min"
+      [step]="step"
+      (ngModelChange)="valueChange.next(row[key])"
+    />
+  </div>
+</div>
+<span *ngIf="!row?.isEditable">{{row[key]}}</span>

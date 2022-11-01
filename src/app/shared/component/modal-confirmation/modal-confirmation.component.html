@@ -1,0 +1,29 @@
+<div fxLayout="column">
+  <div class="title" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="4px">
+    <ng-lottie
+      [options]="lottieOption"
+      [width]="'45px'"
+      *ngIf="data?.lottie"
+    ></ng-lottie>
+    <img *ngIf="data?.customIcon" [src]="data?.customIcon" alt="">
+    <material-icon [class.text-danger]="data?.title === 'ALERT'" *ngIf="data?.icon" [name]="data.icon" type="round"></material-icon>
+    <span class="wow fadeInLeft" data-wow-delay="150ms" data-wow-duration="350ms">{{data?.title}}</span>
+  </div>
+  <span class="content" [innerHTML]="data?.content"></span>
+</div>
+
+<div class="dialog-actions" fxLayout="row" fxLayoutAlign="end">
+  <button mat-button class="btn-confirmation"
+          (click)="onConfirm()"
+          [disabled]="data?.loading"
+          *ngIf="data?.showConfirm"
+  >
+    <span>{{data?.confirmLabel}}</span>
+    <mat-progress-bar *ngIf="data?.loading" mode="query"></mat-progress-bar>
+  </button>
+  <button mat-button class="btn-cancel"
+          *ngIf="data?.showCancel"
+          (click)="onCancel()"
+          [disabled]="data?.loading"
+  >{{data?.cancelLabel}}</button>
+</div>

@@ -1,0 +1,65 @@
+app-catalogue-import {
+  .fill-spacer {
+    margin-right: auto;
+  }
+  h1 {
+    margin: 0 !important;
+  }
+  mat-divider {
+    margin: 1em 0;
+  }
+
+  img {
+    margin-right: 1em;
+  }
+
+  p {
+    font-size: 1.15em;
+    margin: 2em 0;
+  }
+
+  .file-input {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border: 1px solid lightgrey;
+    padding: 4em;
+    cursor: pointer;
+    material-icon {
+      i {
+        font-size: 3em;
+      }
+    }
+    &:hover {
+      background-color: #f3f3f3;
+    }
+  }
+
+  app-import-setting {
+    margin: 2em 0;
+  }
+
+  mat-divider {
+    margin-top: 1em !important;
+  }
+
+  .mat-step-header {
+    //pointer-events: none !important;
+  }
+
+  #reset-button {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    button {
+      border-radius: 28px;
+    }
+  }
+
+  #ok-button {
+    position: absolute;
+    right: 30px;
+    top: 0;
+  }
+}

@@ -1,0 +1,18 @@
+<div fxLayout="column" fxLayoutGap="18px" class="facture-mobile-view">
+  <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="8px">
+    <img src="assets/svg/youngdev.svg" alt="logo youngdev" width="34px">
+    <div fxLayout="column">
+      <span>Facture <b>{{(data?.reference || '') | mask: 'SSS/0000/0*'}}</b></span>
+      <span class="text-secondary">{{data?.receiver?.name}}</span>
+    </div>
+    <button class="ml-auto" mat-icon-button [disabled]="!!data?.isUpdating" (click)="close()"><material-icon name="close"></material-icon></button>
+  </div>
+  <form fxLayout="column">
+    <mat-form-field appearance="outline">
+      <mat-label>Reçu par</mat-label>
+      <input type="text" matInput autocomplete="off" [disabled]="!!data.isUpdating" [(ngModel)]="receivedBy" name="name"/>
+    </mat-form-field>
+    <button mat-flat-button color="primary" [disabled]="!!data?.isUpdating || receivedBy?.length === 0" (click)="save()">Enregistrer</button>
+    <mat-progress-bar mode="indeterminate" *ngIf="data?.isUpdating"></mat-progress-bar>
+  </form>
+</div>

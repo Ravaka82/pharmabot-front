@@ -1,0 +1,50 @@
+<div class="container" fxLayout="column">
+  <div id="chat-user-container" fxFlex="8%">
+    <div fxLayout="row" fxLayoutAlign="start center">
+      <div class="avatar" fxFlex="60px">
+        <ngx-avatar [name]="user.pseudo" size="45"></ngx-avatar>
+      </div>
+      <div>
+        <b>{{user.pseudo}}</b>
+      </div>
+      <button mat-icon-button class="ml-auto" (click)="onShowDeletedMessage()">
+        <mat-icon *ngIf="showDeletedMessage">visibility</mat-icon>
+        <mat-icon *ngIf="!showDeletedMessage">visibility_off</mat-icon>
+      </button>
+    </div>
+  </div>
+  <div id="chat-user-body" fxFlex="81%">
+    <div class="chat-message-container" *ngFor="let message of messageViews">
+      <div class="chat-message" [ngClass]="message.cssClass" [class.is-me]="message.isMe" [class.chat-deleted]="message.isDeleted" matRipple
+           [matMenuTriggerFor]="menu"
+           [matMenuTriggerData]="message"
+      >
+        <div *ngIf="!message.isMe" class="chat-message-avatar">
+          <ngx-avatar [name]="message.to.pseudo" size="30"></ngx-avatar>
+          <div>
+            <b>{{message.to.pseudo}}</b>
+            <p class="chat-content">{{ message.content }}</p>
+          </div>
+        </div>
+
+        <div *ngIf="message.isMe">
+          <span>{{ message.content }}</span>
+        </div>
+      </div>
+      <span class="chat-timestamp" [class.is-me]="message.isMe">{{message.createdAt | date: 'dd MMM  yyyy - HH:mm'}}</span>
+    </div>
+  </div>
+  <div id="chat-user-input">
+    <app-chat-input (submit)="onNewMessage($event)"></app-chat-input>
+  </div>
+</div>
+
+<mat-menu #menu="matMenu">
+  <ng-template matMenuContent let-id="_id" let-isDeleted="isDeleted">
+    <button mat-menu-item (click)="deleteMessage(id)" [disabled]="isDeleted">
+      <mat-icon>close</mat-icon>
+      <span>Supprimer</span>
+    </button>
+  </ng-template>
+</mat-menu>
+

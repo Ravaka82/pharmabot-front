@@ -1,0 +1,34 @@
+<div fxLayout="column" fxLayoutGap="8px" id="search-mobile" *ngIf="selectedTabIndex === 1">
+  <app-search
+    class="wow fadeInUp"
+    data-wow-delay="500ms"
+    data-wow-duration="350ms"
+    (search)="onSearch($event)"
+  ></app-search>
+  <div id="search-results" fxLayout="column" fxLayoutGap="8px">
+    <div class="card" *ngFor="let row of rows" fxLayout="column" fxLayoutGap="8px">
+      <span><b>{{row?.designation}}</b></span>
+      <div fxLayout="row" fxLayoutAlign="space-between">
+        <div fxLayout="row" fxLayoutGap="8px">
+          <span class="text-secondary">TVA</span>
+          <span>{{row?.tva || '-'}}</span>
+        </div>
+        <div fxLayout="row" fxLayoutGap="8px">
+          <span class="text-secondary">Prix Vente</span>
+          <span>{{computePrixVente(row) | number: '1.0-0'}} Ar</span>
+        </div>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="space-between">
+        <div fxLayout="row" fxLayoutGap="8px">
+          <span class="text-secondary">Date exp.</span>
+          <span>{{row?.date_expiration || '-'}}</span>
+        </div>
+        <div class="chip-item"
+             [style.background-color]="row.couleur"
+             [class.text-light]="row.couleurText === 'text-white'"
+             [class.text-dark]="row.couleurText === 'text-dark'"
+        >{{row.fournisseur}}</div>
+      </div>
+    </div>
+  </div>
+</div>

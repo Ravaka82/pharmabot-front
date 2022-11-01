@@ -1,0 +1,10 @@
+<div class="chat-input-container" fxLayout="row" fxLayoutAlign="start center">
+<!--  <button mat-icon-button>-->
+<!--    <mat-icon>attach_file</mat-icon>-->
+<!--  </button>-->
+  <textarea rows="3" fxFlex="80%" cdkTextareaAutosize [(ngModel)]="message"></textarea>
+  <button mat-button fxFlex="20%" (click)="sendMessage()" [disabled]="message.length === 0">
+    <mat-icon>send</mat-icon>
+    Envoyer
+  </button>
+</div>

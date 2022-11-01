@@ -1,0 +1,38 @@
+<div class="toolbar-custom">
+  <button mat-button (click)="addFournisseur()">
+    <div fxLayoutAlign="center">
+      <material-icon name="add"></material-icon>
+      <span>Ajouter un fournisseur</span>
+    </div>
+  </button>
+</div>
+<ngx-datatable
+  class="material"
+  [columns]="columns"
+  [columnMode]="ColumnMode.standard"
+  [headerHeight]="50"
+  [footerHeight]="50"
+  [rowHeight]="45"
+  [rows]="rows"
+  [scrollbarV]="true"
+>
+</ngx-datatable>
+
+<ng-template let-row="row" #fournisseurTemplate>
+  <app-input-editable (change)="saveUpdate(row)" yyInputEditable [row]="row" type="text" key="name"></app-input-editable>
+</ng-template>
+
+<ng-template let-row="row" #authorizeTemplate>
+  <mat-checkbox class="checkbox" color="primary"
+                [disabled]="row?.disabled"
+                [checked]="row.checked"
+                #checked
+                (change)="updateCatalogueGroupe(row, checked.checked)"
+  ></mat-checkbox>
+</ng-template>
+
+<ng-template let-row="row" #actionTemplate>
+  <button mat-icon-button color="warn" (click)="deleteFournisseur(row)">
+    <material-icon name="clear"></material-icon>
+  </button>
+</ng-template>

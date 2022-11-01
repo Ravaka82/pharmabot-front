@@ -1,0 +1,68 @@
+@import "../../../../theme";
+
+app-navbar {
+  #container {
+    //color: white;
+    //background-color: #10172ae0;
+    background-color: white;
+    border-bottom: 1px solid #eee;
+    //height: 50px;
+    height: 64px;
+
+    .fill-space {
+      margin-right: auto;
+    }
+
+    //position: fixed;
+    //top: 0;
+    //z-index: 999;
+    #menu {
+      margin-left: 1em;
+    }
+  }
+
+  #internet {
+    margin-left: 1em;
+    position: relative;
+    #online i, #offline i {
+      font-size: 1.25em;
+      position: absolute;
+      right: -.5em;
+      bottom: 0;
+    }
+  }
+
+  #logout {
+    margin-right: 1em;
+    margin-left: 1em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .active-route {
+    border-radius: 8px;
+    background-color: $tertiary-color;
+    padding: .65em !important;
+    material-icon {
+      color: $primary-color;
+    }
+    span {
+      color: $primary-color;
+      font-weight: 500;
+    }
+  }
+
+  .avatar {
+    background-color: #FFFFFF1F;
+    padding: .5em;
+    border-radius: 50% 50%;
+
+    & + span {
+      margin-right: 2em;
+    }
+  }
+  .mat-badge {
+    right: 0;
+  }
+}

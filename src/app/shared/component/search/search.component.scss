@@ -1,0 +1,23 @@
+@import 'src/theme';
+
+.search {
+  text-transform: uppercase;
+  font-size: 1.2em !important;
+  border: 1px solid $dark-color;
+  padding: 0 .25em;
+  border-radius: 1em;
+  width: 350px;
+  margin: auto;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  input {
+    width: calc(100% - 70px);
+    height: 50px;
+    border: none;
+    outline: none;
+  }
+  .search-icon {
+    color: black;
+  }
+}

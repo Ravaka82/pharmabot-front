@@ -1,0 +1,19 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav [mode]="(isMobile$ | async) ? 'over' : 'side'" [opened]="(isSideNavOpened$ | async)" [disableClose]="true">
+    <div class="sidenav-menu-container">
+      <app-sidenav></app-sidenav>
+    </div>
+  </mat-sidenav>
+  <mat-sidenav-content fxLayout="column">
+    <app-navbar fxFlex="65px"></app-navbar>
+    <div id="app-container" fxFlex="calc(100% - 65px)">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+<div class="only-mobile" *ngIf="(isSideNavOpened$ | async)">
+  <button class="text-primary" mat-icon-button (click)="closeSideNav()" id="close-sidenav">
+    <material-icon name="menu_open"></material-icon>
+  </button>
+</div>

@@ -1,0 +1,43 @@
+app-roles {
+
+  .mat-display-1 {
+    margin-bottom: .65em !important;
+  }
+
+  .checkbox {
+    margin-left: 1em;
+  }
+
+  .content {
+    width: 100%;
+    display: flex;
+    gap: 1.5em;
+    .grid {
+      width: 100%;
+    }
+  }
+
+  .mat-display-1 {
+    margin-bottom: .65em;
+  }
+
+  #role-list, .container-grid {
+    width: 50%;
+  }
+  ngx-datatable {
+    height: calc(100vh - 270px)
+
+  }
+  .container-grid {
+    display: flex;
+    flex-direction: column;
+    .grid {
+      flex: 50%;
+    }
+  }
+  .toolbar-custom {
+    .label {
+      margin-left: 1em;
+    }
+  }
+}

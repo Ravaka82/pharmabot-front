@@ -1,0 +1,43 @@
+<div fxLayoutAlign="center center" fxLayout="column" fxLayoutGap="24px" cdkDropListGroup>
+  <mat-chip-list cdkDropList>
+      <mat-chip
+        *ngFor="let col of columnList"
+        cdkDrag
+        (cdkDragStarted)="itemDrag = col; itemDragType = 'fromSheet'"
+      >
+        <div *cdkDragPlaceholder></div>
+        Colonne {{col}}
+      </mat-chip>
+  </mat-chip-list>
+  <ngx-datatable
+    id="import-setting"
+    #table
+    class="material"
+    [columns]="columns"
+    [columnMode]="ColumnMode.standard"
+    [headerHeight]="50"
+    rowHeight="auto"
+    [limit]="10"
+    [rows]="rows"
+    [sorts]="[{prop: 'designation', dir: 'desc'}]"
+  >
+  </ngx-datatable>
+
+  <ng-template let-row="row" let-column="column" #templateSelect>
+    <div cdkDropList (cdkDropListDropped)="dropped($event, column)" class="placeholder">
+      <mat-chip
+        *ngIf="row[column.prop]"
+        cdkDrag
+        (cdkDragStarted)="itemDrag = row[column.prop]; itemDragType = 'fromTable'"
+      >Colonne {{row[column.prop]}}
+        <div *cdkDragPlaceholder></div>
+      </mat-chip>
+    </div>
+  </ng-template>
+
+  <h3>Résultat</h3>
+
+  <app-import-validation
+    [rows]="previewData"
+  ></app-import-validation>
+</div>

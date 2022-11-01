@@ -1,0 +1,63 @@
+<div class="container">
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="14px">
+      <app-page-title title="Stats" [loading]="loading"></app-page-title>
+    </div>
+    <mat-grid-list cols="4" rowHeight="170px" gutterSize="15px" >
+      <mat-grid-tile [style.background]="'skyblue'"><h1 style="font-size:40px;margin-top:50px;">{{this.countFournisseur}}</h1><mat-grid-tile-header>
+        <h4><mat-icon>assignment_ind</mat-icon>  Total Fournisseur</h4>
+      </mat-grid-tile-header></mat-grid-tile>
+      <mat-grid-tile [style.background]="'pink'"><h1 style="font-size:40px;margin-top:50px;">{{ this.countArchive }}</h1><mat-grid-tile-header>
+        <h4><mat-icon> list_alt</mat-icon>  Total Medicament</h4>
+      </mat-grid-tile-header></mat-grid-tile>
+      <mat-grid-tile [style.background]="'DarkSeaGreen'"><h1 style="font-size:40px;margin-top:50px;">{{this.countUsers}}</h1><mat-grid-tile-header>
+        <h4><mat-icon> contacts</mat-icon>  Total Utilisateur</h4>
+      </mat-grid-tile-header></mat-grid-tile>
+      <mat-grid-tile [style.background]="'Plum'"><h1 style="font-size:40px;margin-top:50px;">{{this.countClient}}</h1><mat-grid-tile-header>
+        <h4><mat-icon>perm_identity</mat-icon>  Total  Client</h4>
+      </mat-grid-tile-header></mat-grid-tile>
+      </mat-grid-list>
+    <form class="example-form" [formGroup]="designationForm" (ngSubmit)="onSubmit()">
+      <mat-form-field appearance="standard">
+        <mat-date-range-input [rangePicker]="dateRangePicker" appearance="outline">  
+          <input matStartDate
+            placeholder="Date debut"
+            #dateRangeStart
+            (dateChange)="dateRangeChange(dateRangeStart)"
+            formControlName="dateStart">
+          <input matEndDate
+            placeholder="Date fin"
+            #dateRangeEnd
+            (dateChange)="dateRangeChange(dateRangeEnd)"
+            formControlName="dateEnd">
+        </mat-date-range-input>
+        <mat-datepicker-toggle matPrefix
+          [for]="dateRangePicker">
+        </mat-datepicker-toggle>
+        <mat-date-range-picker #dateRangePicker></mat-date-range-picker>
+      </mat-form-field>
+      <mat-radio-group aria-label="Select an option" >
+        <label class="example-margin">CHOISIR VOTRE OPTION:</label>
+        <mat-radio-button class="radio-button" value="medicament" *ngFor="let section of someName" [value]="section.value" (change)="onChange($event)" >{{section.label}}</mat-radio-button>
+      </mat-radio-group>
+      <br/><br/>
+        <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>designation/nom commun</mat-label>
+            <input matInput placeholder="entrez  votre choix" formControlName="designation">
+        </mat-form-field>
+        <button  mat-raised-button type="submit" class ="but" color="primary">
+          <img src='assets/svg/evolution.png' width="32">
+          <span> Voir Evolution </span>
+        </button>
+    </form>
+    <div id="chart">
+        <apx-chart
+          [series]="chartOptions.series"
+          [chart]="chartOptions.chart"
+          [xaxis]="chartOptions.xaxis"
+          [dataLabels]="chartOptions.dataLabels"
+          [grid]="chartOptions.grid"
+          [stroke]="chartOptions.stroke"
+          [title]="chartOptions.title"
+        ></apx-chart>
+      </div>
+</div>

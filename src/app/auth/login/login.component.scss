@@ -1,0 +1,76 @@
+@import "../../../theme";
+
+#login {
+  height: 100%;
+}
+
+.head {
+  margin-bottom: 4em;
+  .head-title {
+    font-size: 4em;
+    line-height: 1em;
+    font-weight: bolder !important;
+  }
+
+  .head-title-label {
+    margin: 1em 0;
+    font-size: 1.75em;
+    color: $secondary-color;
+  }
+}
+
+
+.left-side {
+  width: 100%;
+  height: 100%;
+  padding-left: 8em;
+  background-color: #1E293B;
+  color: $secondary-color;
+  font-weight: lighter;
+  margin-right: auto;
+  position: relative;
+  .background{
+    position: absolute;
+    width: 40%;
+    top:0;
+    right: 0;
+    height: 30vh;
+    background-color: rgba(148, 163, 184, 0.15);
+    -webkit-mask: url(/assets/svg/grid-dot.svg)  center;
+    mask: url(/assets/svg/grid-dot.svg) center;
+    mask-size: 150px;
+  }
+}
+
+.hours {
+  background-color: white;
+  padding: .5em;
+  font-size: 2em;
+  font-weight: bolder;
+  display: flex;
+  margin-left: .5em;
+  align-items: center;
+  border-radius: 4px;
+  color: $dark-color;
+}
+
+.label {
+  font-size: 1.5em;
+}
+
+.right-side {
+  .logo {
+    img { width: 75px}
+    span { font-size: 3em; }
+  }
+  button {
+    height: 45px;
+  }
+  a { text-decoration: none}
+  #copyright, #form {
+    margin-top: auto;
+  }
+  #copyright {
+    margin-bottom: 2em;
+  }
+}

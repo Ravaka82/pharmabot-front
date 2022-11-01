@@ -1,0 +1,32 @@
+<div id="chat-container" fxLayout="column">
+  <div class="chat-list-header" fxLayout="column" fxLayoutGap="25px" fxFlex="20%">
+    <div id="current-account" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
+      <ngx-avatar name="Current" size="45"></ngx-avatar>
+      <b class="current-account-name">Tsiory</b>
+    </div>
+    <app-search (search)="onSearch($event)"></app-search>
+  </div>
+
+  <mat-tab-group>
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon>person</mat-icon>
+        <span>Pharmabookers</span>
+      </ng-template>
+      <app-chat-pharmabooker
+        [users]="users"
+      ></app-chat-pharmabooker>
+    </mat-tab>
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon>people</mat-icon>
+        <span>Groupes</span>
+      </ng-template>
+      <app-chat-groupe
+        (newGroupe)="onNewGroupe($event)"
+        [groupes]="groupes"
+        [users]="users"
+      ></app-chat-groupe>
+    </mat-tab>
+  </mat-tab-group>
+</div>

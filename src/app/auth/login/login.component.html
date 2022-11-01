@@ -1,0 +1,83 @@
+<div fxLayout="row" id="login">
+  <div class="left-side only-desktop" fxLayout="column" fxLayoutAlign="center">
+    <div class="background wow fadeInRight" data-wow-delay="0ms"  data-wow-duration="1000ms"></div>
+    <div class="head" fxLayout="column">
+      <div class="head-title wow fadeInUp text-light" data-wow-delay="0ms" data-wow-duration="1000ms">Bienvenue <br> dans <span class="text-primary">Pharmabot</span></div>
+      <span class="head-title-label wow fadeInUp" data-wow-delay="250ms" data-wow-duration="1000ms">Application de comparateur de prix</span>
+    </div>
+
+    <div fxLayout="column"  fxLayoutAlign="center" fxLayoutGap="2em" class="information-list">
+      <div fxLayoutAlign="start center" class="wow fadeInUp" data-wow-delay="500ms" data-wow-duration="1000ms" fxLayoutGap="8px">
+        <material-icon name="timer"></material-icon>
+        <div fxLayout="row" fxLayoutAlign="start center" class="label">
+          Gagnez plus de
+          <span class="hours">37 Heures / mois</span>
+        </div>
+      </div>
+      <div fxLayoutAlign="start center" class="wow fadeInUp" data-wow-delay="1000ms" data-wow-duration="1000ms" fxLayoutGap="8px">
+        <material-icon name="speed"></material-icon>
+        <div class="label">Comparez plusieurs catalogues excel en même temps <span style="font-size: 1.5em"><b>100x</b></span> plus vite</div>
+      </div>
+      <div fxLayoutAlign="start center" class="wow fadeInUp" data-wow-delay="1500ms" data-wow-duration="1000ms" fxLayoutGap="8px">
+        <material-icon name="auto_awesome"></material-icon>
+        <span class="label">Rearrangez des catalogues automatiquement</span>
+      </div>
+      <div fxLayoutAlign="start center" class="wow fadeInUp" data-wow-delay="2000ms" data-wow-duration="1000ms" fxLayoutGap="8px">
+        <material-icon name="dvr"></material-icon>
+        <span class="label">Facilitez vos préparations de commande</span>
+      </div>
+    </div>
+
+  </div>
+  <div class="right-side wow fadeInRight" fxFlex="30%" fxLayout="column">
+    <div id="form" fxLayoutGap="48px" fxLayoutAlign="center center" fxLayout="column">
+      <div class="logo" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
+        <img src="../../../assets/svg/pharmabot.svg" >
+      </div>
+      <div>
+        <form fxLayout="column" (submit)="login()" [formGroup]="inputForm">
+          <mat-form-field appearance="outline">
+            <mat-label>Identifiant</mat-label>
+            <material-icon name="account_circle" matSuffix></material-icon>
+            <input type="text" matInput formControlName="pseudo" autocomplete="off">
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Mot de passe</mat-label>
+            <input [attr.type]="showPassword ? 'text' : 'password'" matInput formControlName="password">
+            <button mat-icon-button
+                    matSuffix
+                    type="button"
+                    (click)="showPassword = !showPassword"
+            >
+              <material-icon [name]="!showPassword ? 'visibility_off' : 'visibility'"></material-icon>
+            </button>
+          </mat-form-field>
+          <p fxLayoutAlign="center" *ngIf="errorMessage">
+            <mat-error>{{errorMessage}}</mat-error>
+          </p>
+          <button mat-button [class.bg-primary]="inputForm.valid && !loading"  type="submit" [disabled]="inputForm.invalid || loading">
+            Connexion
+            <mat-progress-bar mode="query" *ngIf="loading"></mat-progress-bar>
+          </button>
+        </form>
+      </div>
+      <div fxLayout="column" fxLayoutAlign="center center">
+        <p>En savoir plus?</p>
+        <p>
+          <a class="phone" mat-flat-button href="tel:+261348666350" fxLayout="column" fxLayoutAlign="center center">
+            <material-icon name="phone"></material-icon>
+            <span class="text-dark">+261 34 86 663 50</span>
+          </a>
+          <a class="phone" mat-flat-button href="tel:+261348433226" fxLayout="column" fxLayoutAlign="center center">
+            <material-icon name="phone"></material-icon>
+            <span class="text-dark">+261 34 84 332 26</span>
+          </a>
+        </p>
+      </div>
+    </div>
+    <div id="copyright" fxLayout="column" fxLayoutAlign="center center" class="text-secondary">
+      <span>© Youngdev Madagascar</span>
+      <span>Designed by Tsiory RABEARISON</span>
+    </div>
+  </div>
+</div>

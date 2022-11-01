@@ -1,0 +1,78 @@
+<div class="container">
+  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="14px">
+    <app-page-title title="Historiques" [loading]="loading"></app-page-title>
+    <span class="mr-auto"></span>
+    <app-search
+      class="wow fadeInRight"
+      data-wow-delay="500ms"
+      data-wow-duration="350ms"
+      (search)="onSearch($event)"
+    ></app-search>
+  </div>
+  <button *ngIf="bulkSelected.length > 0" (click)="bulkDeleteHistory()" mat-flat-button color="warn">Supprimer {{bulkSelected?.length}} éléments</button>
+  <div class="content">
+    <ngx-datatable
+      #table
+      class="material"
+      [columns]="columns"
+      [columnMode]="ColumnMode.flex"
+      [headerHeight]="50"
+      [footerHeight]="50"
+      [rowHeight]="45"
+      [rows]="rows"
+      [scrollbarV]="true"
+      [sorts]="[{prop: 'createdAt', dir: 'desc'}]"
+      [selectionType]="SelectionType.checkbox"
+      (select)="onSelect($event)"
+      style="width: 100%;"
+    >
+      <ngx-datatable-column
+        [width]="50"
+        [sortable]="false"
+        [canAutoResize]="false"
+        [draggable]="false"
+        [resizeable]="false"
+      >
+        <ng-template
+          ngx-datatable-header-template
+          let-value="value"
+          let-allRowsSelected="allRowsSelected"
+          let-selectFn="selectFn"
+        >
+          <mat-checkbox color="warn" [checked]="allRowsSelected" (change)="selectFn(allRowsSelected)"></mat-checkbox>
+        </ng-template>
+        <ng-template
+          ngx-datatable-cell-template
+          let-value="value"
+          let-isSelected="isSelected"
+          let-onCheckboxChangeFn="onCheckboxChangeFn"
+        >
+          <mat-checkbox color="warn" [checked]="isSelected" (change)="onCheckboxChangeFn($event)"></mat-checkbox>
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Action" [flexGrow]="10"></ngx-datatable-column>
+      <ngx-datatable-column name="Utilisateur" prop="user.pseudo" [flexGrow]="10"></ngx-datatable-column>
+      <ngx-datatable-column name="Description" [flexGrow]=52></ngx-datatable-column>
+      <ngx-datatable-column name="Date de création" [flexGrow]="20">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+            {{row.createdAt | date: 'dd/MM/yyyy HH:mm'}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Details" [flexGrow]="8">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          <button mat-icon-button (click)="openDetail(row)" *ngIf="row.metadata">
+            <material-icon name="visibility" type="two-tone"></material-icon>
+          </button>
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Supprimer" [flexGrow]="10">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          <button mat-icon-button class="text-danger" (click)="deleteCatalogue(row)">
+            <material-icon name="close"></material-icon>
+          </button>
+        </ng-template>
+      </ngx-datatable-column>
+
+    </ngx-datatable>
+  </div>
+</div>

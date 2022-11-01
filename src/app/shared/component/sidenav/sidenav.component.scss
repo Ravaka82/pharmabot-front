@@ -1,0 +1,75 @@
+@import "src/theme";
+
+.title {
+  height: 75px;
+  h1 {
+    margin: 0;
+  }
+  .version {
+    margin-top: 1em;
+  }
+}
+
+.menu {
+  margin-top: 2em;
+  margin-left: 1em;
+  + * {
+    margin-top: .5em;
+  }
+}
+
+#account-info {
+  margin-top: 1em;
+}
+
+.active-route {
+  &:hover {
+    background-color: #FFFFFF1F;
+  }
+  border-radius: 8px;
+  background-color: #FFFFFF1F;;
+  padding: .65em !important;
+  material-icon {
+    transform: translateX(.25em);
+    transition: transform .2s ease-in-out;
+    color: $primary-color;
+  }
+  span {
+    color: $primary-color;
+    font-weight: 500;
+  }
+}
+
+a {
+  &:after {
+    content: '';
+    width: 0;
+    transition: width .2s ease-in-out;
+  }
+  material-icon {
+    transform: translateX(0);
+    transition: transform .2s ease-in-out;
+    color: white;
+    font-size: 24px;
+  }
+  span {
+    color: white;
+  }
+  font-size: 13px !important;
+}
+
+mat-nav-list {
+  margin-bottom: 1em;
+}
+
+.avatar {
+  background-color: #FFFFFF1F;
+  padding: 2em;
+  border-radius: 50% 50%;
+  margin: 2em;
+}
+
+.divider {
+  border-color: rgba(255, 255, 255, 0.21);
+  margin: 2em;
+}

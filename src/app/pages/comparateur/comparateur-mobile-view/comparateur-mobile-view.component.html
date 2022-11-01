@@ -1,0 +1,15 @@
+<div class="mobile-container">
+  <mat-tab-group #group mat-stretch-tabs>
+    <mat-tab label="Paramètre">
+      <app-comparateur-setting-mobile
+        [rows]="settings || []"
+      ></app-comparateur-setting-mobile>
+    </mat-tab>
+    <mat-tab label="Comparer">
+      <app-comparateur-search-mobile
+        [selectedTabIndex]="group.selectedIndex"
+        [settings]="settings || []"
+      ></app-comparateur-search-mobile>
+    </mat-tab>
+  </mat-tab-group>
+</div>

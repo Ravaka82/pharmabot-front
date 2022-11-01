@@ -1,0 +1,27 @@
+<div class="container">
+  <form class="example-form" fxLayoutAlign="center" (ngSubmit)="onSubmit()">
+      <mat-form-field appearance="fill">
+        <mat-label>Selection fournisseur</mat-label>
+        <mat-select disableRipple (selectionChange)=changeRatio($event)>
+          <mat-option value="fournisseur" *ngFor="let fournisseur of fournisseurs" [value]="fournisseur._id">{{fournisseur.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <button  mat-raised-button type="submit" class="button" color="Link">
+        <img src='assets/svg/pin.png' width="32">
+        <span>Voir marker</span>
+      </button>
+      <!-- <mat-progress-bar mode="indeterminate"*ngIf="submitting"></mat-progress-bar> -->
+  </form>
+    <br><br>
+    <div class="map-container">
+        <div class="map-frame">
+          <div id="map"></div>
+        </div>
+        <button  mat-raised-button type="submit" class="example-form" color="Basic"  (click)="onclick()">
+          <img src='assets/svg/home.png'  width="32">
+          <span>Voir Tout les marker</span>
+        </button>
+      </div>
+      
+      
+</div>

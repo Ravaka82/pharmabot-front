@@ -1,0 +1,68 @@
+:host {
+  --primary-color: 0, 210, 255;
+  --tertiary-color: 49, 53, 69;
+  --success-color: 11,132,87;
+  --info-color: 204, 251, 241;
+  --warning-color: 255, 127, 63;
+  --danger-color: 244, 67, 47;
+  --dark-color: 16, 23, 42;
+  --light-color: 241,  245, 249;
+  --secondary-color: 168, 168, 168;
+  --gray-color: 244, 244, 244;
+  --yellow-color: 253, 216, 53;
+}
+
+$primary-color: rgb(var(--primary-color));
+$secondary-color: rgb(var(--secondary-color));
+$tertiary-color: rgb(var(--tertiary-color));
+$success-color: rgb(var(--success-color));
+$info-color: rgb(var(--info-color));
+$warning-color: rgb(var(--warning-color));
+$danger-color: rgb(var(--danger-color));
+$dark-color: rgb(var(--dark-color));
+$light-color: rgb(var(--light-color));
+$secondary-color: rgb(var(--secondary-color));
+$gray-color: rgb(var(--gray-color));
+$yellow-color: rgb(var(--yellow-color));
+
+.text-primary { color: $primary-color }
+.text-secondary { color: $secondary-color !important;}
+.text-tertiary { color: $tertiary-color }
+.text-success { color: $success-color }
+.text-info { color: $info-color }
+.text-warning { color: $warning-color }
+.text-danger { color: $danger-color }
+.text-dark { color: $dark-color !important;}
+.text-light { color: $light-color !important;}
+.text-gray { color: $gray-color !important;}
+.text-yellow { color: $yellow-color !important;}
+
+.bg-primary { background-color: $primary-color; color: $light-color }
+.bg-secondary { background-color: $secondary-color; color: $light-color }
+.bg-tertiary { background-color: $tertiary-color; color: $primary-color }
+.bg-success { background-color: $success-color; color: $light-color }
+.bg-info { background-color: $info-color; color: $light-color }
+.bg-warning { background-color: $warning-color !important; color: $light-color !important }
+.bg-danger { background-color: $danger-color; color: $light-color }
+.bg-dark { background-color: $dark-color; color: $light-color }
+.bg-light { background-color: $light-color; color: $dark-color }
+.bg-gray { background-color: $gray-color; color: $dark-color }
+.bg-yellow { background-color: $yellow-color !important; color: $dark-color !important; }
+
+.bg-primary-chip { background-color: rgba(var(--primary-color), .1); color: $primary-color }
+.bg-secondary-chip { background-color: rgba(var(--secondary-color), .1); color: $secondary-color }
+.bg-tertiary-chip { background-color: rgba(var(--tertiary-color), .1); color: $primary-color }
+.bg-success-chip { background-color: rgba(var(--success-color), .1); color: $success-color }
+.bg-danger-chip { background-color:  rgba(var(--danger-color), .1); color: $danger-color}
+.bg-warning-chip { background-color:  rgba(var(--warning-color), .1); color: $warning-color}
+.bg-gray-chip { background-color:  rgba(var(--gray-color), .1); color: $gray-color}
+.bg-yellow-chip { background-color:  rgba(var(--yellow-color), .1); color: $yellow-color}
+
+.bg-primary-badge { .mat-badge-content { @extend .bg-primary } }
+.bg-secondary-badge { .mat-badge-content { @extend .bg-secondary } }
+.bg-tertiary-badge { .mat-badge-content { @extend .bg-tertiary } }
+.bg-success-badge { .mat-badge-content { @extend .bg-success } }
+.bg-danger-badge {  .mat-badge-content { @extend .bg-danger } }
+.bg-warning-badge {  .mat-badge-content { @extend .bg-warning } }
+.bg-gray-badge {  .mat-badge-content { @extend .bg-gray } }
+.bg-yellow-badge { .mat-badge-content { @extend .bg-yellow } }

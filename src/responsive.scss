@@ -1,0 +1,83 @@
+@import "theme";
+$breakpoint-responsive: 1080px;
+
+@media screen and (max-width: $breakpoint-responsive) {
+  .only-desktop { display: none !important }
+  .only-mobile { display: inherit !important }
+
+  .container {
+    margin: 0 !important;
+    border-radius: 0 !important;
+    width: 100% !important;
+    height: calc(100vh - 55px) !important;
+  }
+
+  .mobile-container {
+    margin: 50px 0 8px 0;
+  }
+
+  app-login {
+    .right-side { max-width: 100% !important }
+  }
+  app-navbar {
+    position: fixed;
+    z-index: 1;
+    width: 100%;
+    background-color: $secondary-color;
+    .account-pseudo-avatar { margin-right: 1em !important }
+    .navbar-title {
+      position: relative;
+      margin-left: auto;
+      .mat-badge { position: relative !important; }
+      .mat-badge-medium.mat-badge-overlap.mat-badge-after .mat-badge-content {
+        inset: -2px -34px auto auto;
+      }
+      &.only-mobile {
+        b { color: black !important; }
+      }
+    }
+  }
+
+  app-search {
+    position: -webkit-sticky;
+    position: sticky;
+    z-index: 10;
+    top: 50px;
+    box-shadow: rgb(0 0 0 / 10%) 0px 20px 25px -5px, rgb(0 0 0 / 4%) 0px 10px 10px -5px;
+    background-color: white;
+    .search {
+      border: none !important;
+    }
+  }
+
+  #close-sidenav {
+    position: fixed;
+    left: 265px;
+    top: 6px;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+  }
+
+  #button-logout-mobile {
+    background-color: $danger-color;
+    color: white;
+    position: fixed;
+    right: 10px;
+    top: 6px;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+  }
+
+  .cdk-overlay-pane,
+  .facturation-sender,
+  .note {
+    max-width: 100% !important;
+  }
+}
+
+@media screen and (min-width: ($breakpoint-responsive)) {
+  .only-mobile { display: none !important }
+  .only-desktop { display: inherit !important }
+}

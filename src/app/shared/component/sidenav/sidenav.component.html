@@ -1,0 +1,53 @@
+<div class="title" fxLayoutAlign="center center" fxLayoutGap="8px">
+  <div fxLayoutAlign="center center" fxLayoutGap="8px">
+    <img src="../../../../assets/svg/pharmabot.svg" width="45px">
+    <h1>{{appName | titlecase}}</h1>
+  </div>
+  <span class="version">{{appVersion}}</span>
+</div>
+
+<div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="24px">
+  <div class="avatar wow pulse" fxLayoutAlign="center center" data-wow-delay="1500ms">
+    <ngx-avatar name="{{account?.pseudo}}"></ngx-avatar>
+  </div>
+  <div fxLayout="column" fxLayoutAlign="center center">
+    <span>{{account?.pseudo | titlecase}} - <b class="text-secondary">{{account?.catalogueGroupeName}}</b></span>
+    <div class="text-secondary" fxLayoutAlign="center center" id="account-info">
+      <material-icon name="admin_panel_settings" type="round"></material-icon>
+      <span>{{account?.role?.name}}</span>
+    </div>
+  </div>
+</div>
+
+<div class="menu">
+  <mat-nav-list *ngFor="let parent of links">
+    <span class="text-secondary menu">{{parent.label}}</span>
+    <mat-list-item *ngFor="let link of parent.children">
+      <a
+        matLine
+        [routerLink]="link.path"
+        routerLinkActive="active-route"
+        fxLayoutAlign="start center"
+        fxLayoutGap="15px"
+        (click)="linkClicked(link.path)"
+      >
+        <material-icon name="{{link.icon}}" [type]="link.iconType"></material-icon>
+        <span>{{ link.label }}</span>
+        <span
+            [matBadge]="link.badge"
+            [matBadgeHidden]="!link.badge || link.badge === 0"
+            class="mat-badge wow bounceIn"
+            [ngClass]="link.color"
+            data-wow-delay="1000ms"
+            data-wow-duration="300ms"
+        ></span>
+      </a>
+    </mat-list-item>
+  </mat-nav-list>
+  <hr class="divider">
+  <div fxLayout="row" fxLayoutAlign="center">
+    <button mat-button id="logout" (click)="logout()" class="bg-danger">
+      Déconnexion
+    </button>
+  </div>
+</div>

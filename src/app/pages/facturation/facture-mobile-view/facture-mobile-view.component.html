@@ -1,0 +1,53 @@
+<div class="mobile-container">
+  <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
+  <div fxLayout="column" fxLayoutGap="8px">
+    <div class="card" *ngFor="let facture of rows">
+      <div fxLayout="row">
+        <div fxLayout="column">
+          <b>{{facture.reference | mask: 'SSS/0000/0*'}}</b>
+          <span>{{facture.catalogueGroupe?.name}}</span>
+        </div>
+        <div class="ml-auto">
+          <span class="status" [ngClass]="getStatut(facture.status).color">{{getStatut(facture.status).label}}</span>
+        </div>
+      </div>
+      <div fxLayout="row">
+        <div fxLayout="column" fxFlex="100%">
+          <span class="text-secondary">Reçu le</span>
+          <span>{{(facture.receivedAt | date: 'dd MMM YYYY à HH:mm') || '-'}}</span>
+        </div>
+        <div fxLayout="column" fxFlex="100%">
+          <span class="text-secondary">Par</span>
+          <span>{{facture?.receivedBy || '-'}}</span>
+        </div>
+      </div>
+      <hr>
+      <div fxLayout="column">
+        <div *ngIf="facture.paidAt; else paidNow">
+          <span fxFlex="50%" class="text-secondary">Remise chèque le</span>
+          <span fxFlex="50%">{{facture.paidAt | date: 'dd MMM YYYY à HH:mm'}}</span>
+        </div>
+        <ng-template #paidNow>
+          <button
+            *ngIf="facture.receivedBy && isAuthorized"
+            color="primary"
+            mat-flat-button
+            class="m-auto"
+            [disabled]="facture.isUpdating || !facture.payAvailableAt"
+            (click)="updatePaid(facture)"
+          >
+            <span>Chèque reçu</span>
+            <mat-progress-bar mode="indeterminate" *ngIf="facture.isUpdating"></mat-progress-bar>
+          </button>
+          <button *ngIf="!facture.receivedBy && isAuthorized" class="m-auto" mat-flat-button fxLayout="row" (click)="updateReceivedBy(facture)">
+            <mat-icon>upload</mat-icon>
+            <span>Mettre à jour</span>
+          </button>
+        </ng-template>
+      </div>
+      <button mat-icon-button class="view-facture-detail-button" (click)="openDetail(facture)">
+        <material-icon name="receipt"></material-icon>
+      </button>
+    </div>
+  </div>
+</div>

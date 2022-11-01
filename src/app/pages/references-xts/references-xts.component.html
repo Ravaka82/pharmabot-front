@@ -1,0 +1,83 @@
+<div class="container">
+  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="14px">
+    <app-page-title title="References xts" [loading]="loading"></app-page-title>
+    <span class="mr-auto"></span>
+    <app-search
+      class="wow fadeInRight"
+      data-wow-delay="500ms"
+      data-wow-duration="350ms"
+      (search)="onSearch($event)"
+    ></app-search>
+  </div>
+  <form [formGroup]="nomCommunForm" (submit)="nomCommun()">
+  <mat-form-field fxLayoutAlign="start Center" appearance="fill">
+    <mat-label>Ecrire le nom Commun</mat-label>
+    <input matInput placeholder="Ecrire le nom Commun" formControlName="nom">
+ </mat-form-field>
+    <button *ngIf="bulkSelected.length > 0" type="submit" mat-flat-button color="accent">VALIDER LE NOM COMMUN POUR LES  : {{bulkSelected?.length}} éléments</button>
+  </form>
+
+  <div class="content">
+    <ngx-datatable
+      #table
+      class="material"
+      [columns]="columns"
+      [columnMode]="ColumnMode.flex"
+      [headerHeight]="100"
+      [footerHeight]="50"
+      [rowHeight]="45"
+      [rows]="rows"
+      [scrollbarV]="true"
+      [sorts]="[{prop: 'createdAt', dir: 'desc'}]"
+      [selectionType]="SelectionType.checkbox"
+      (select)="onSelect($event)"
+      style="width: 100%;"
+    >
+      <ngx-datatable-column
+        [width]="50"
+        [sortable]="false"
+        [canAutoResize]="false"
+        [draggable]="false"
+        [resizeable]="false"
+      >
+        <ng-template
+          ngx-datatable-header-template
+          let-value="value"
+          let-allRowsSelected="allRowsSelected"
+          let-selectFn="selectFn"
+        >
+          <mat-checkbox color="warn" [checked]="allRowsSelected" (change)="selectFn(allRowsSelected)"></mat-checkbox>
+        </ng-template>
+        <ng-template
+          ngx-datatable-cell-template
+          let-value="value"
+          let-isSelected="isSelected"
+          let-onCheckboxChangeFn="onCheckboxChangeFn"
+        >
+          <mat-checkbox color="warn" [checked]="isSelected" (change)="onCheckboxChangeFn($event)"></mat-checkbox>
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="designation"  [flexGrow]="40"></ngx-datatable-column>
+      <ngx-datatable-column name="prix" [flexGrow]="20"></ngx-datatable-column>
+      <ngx-datatable-column name="Date catalogue" [flexGrow]="20">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+            {{row.date_catalogue}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="nom commun" [flexGrow]="40">
+        <ng-template let-row="row" ngx-datatable-cell-template >
+        <div 
+        *ngFor="let product of productRefs">
+          <span *ngIf="row.designation.localeCompare(product.nameProduct)==0" class="text-primary">
+            {{product.refsMap.name}}
+            <button mat-icon-button (click)="deleteProduit(product)">
+              <img src="assets/svg/effacer.png" width="20">
+           </button>
+        </span>
+        </div>
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="fournisseur" [flexGrow]="20"></ngx-datatable-column>
+    </ngx-datatable>
+  </div>
+</div>

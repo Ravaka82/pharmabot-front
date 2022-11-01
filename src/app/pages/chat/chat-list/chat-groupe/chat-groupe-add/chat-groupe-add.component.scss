@@ -1,0 +1,32 @@
+@import "src/theme";
+
+.mat-list-icon {
+  width: 45px !important;
+  height: 45px !important;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.chat-groupe-info {
+  width: 300px;
+  mat-divider {
+    margin: 1em 0;
+  }
+}
+
+.chat-list-content {
+  height: 300px;
+  overflow: auto;
+  cdk-virtual-scroll-viewport {
+    height: 300px;
+  }
+}
+
+.chat-list-content,
+button[type='submit'],
+mat-form-field
+{
+  width: 100%;
+}

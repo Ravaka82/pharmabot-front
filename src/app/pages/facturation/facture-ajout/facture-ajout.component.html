@@ -1,0 +1,82 @@
+<div class="container">
+  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="14px">
+    <app-page-title previousLink="/facturation" title="Créer une facture" [loading]="loading"></app-page-title>
+  </div>
+  <div class="content">
+    <div class="forms">
+      <form
+        fxLayout="column"
+        [formGroup]="factureForm"
+        (submit)="submit()"
+        class="wow fadeInRight"
+        data-wow-duration="500ms"
+      >
+        <h3 class="text-secondary">Information générale</h3>
+        <mat-form-field appearance="outline">
+          <mat-label>Référence</mat-label>
+          <input type="text" matInput formControlName="reference" mask="SSS/0000/0*" autocomplete="off" placeholder="PHA/MMYY/00">
+        </mat-form-field>
+        <div fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="start center">
+          <mat-form-field appearance="outline">
+            <mat-label>Demandeur</mat-label>
+            <mat-select formControlName="sender">
+              <mat-option *ngFor="let client of clients" [value]="client">{{client?.name}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Destination</mat-label>
+            <mat-select formControlName="receiver">
+              <mat-option *ngFor="let client of clients" [value]="client">{{client?.name}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Groupe</mat-label>
+            <mat-select formControlName="catalogueGroupe">
+              <mat-option *ngFor="let catalogueGroupe of catalogueGroupes" [value]="catalogueGroupe._id">{{catalogueGroupe.name}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div formArrayName="facturation">
+          <h3 class="text-secondary">Liste des éléments</h3>
+          <div *ngFor="let item of items.controls; let i = index">
+            <div fxLayout="row" fxLayoutGap="8px" class="list-item" fxLayoutAlign="start center" [formGroupName]="i">
+              <mat-form-field appearance="outline">
+                <mat-label>Designation</mat-label>
+                <input matInput type="text" autocomplete="off" formControlName="designation">
+              </mat-form-field>
+              <mat-form-field appearance="outline" fxFlex="1 1 15%">
+                <mat-label>Quantité</mat-label>
+                <input matInput min="1" type="number" autocomplete="off" formControlName="quantity" (change)="elementChange()">
+              </mat-form-field>
+              <mat-form-field appearance="outline" fxFlex="1 1 20%">
+                <mat-label>Prix unitaire</mat-label>
+                <input matInput min="1" type="number" autocomplete="off" formControlName="price" (change)="elementChange()">
+              </mat-form-field>
+              <button mat-icon-button type="button" color="warn" (click)="deleteItem(i)"><material-icon name="close"></material-icon></button>
+            </div>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <button id="add-more-button" type="button" mat-icon-button class="bg-primary-chip" (click)="addItem()">
+              <material-icon name="add"></material-icon>
+            </button>
+            <span class="add-more"></span>
+          </div>
+        </div>
+        <p>
+          <mat-error>{{errorMessage}}</mat-error>
+        </p>
+        <button mat-raised-button color="primary" type="submit" [disabled]="factureForm.invalid || loading">
+          <span>Enregister</span>
+          <mat-progress-bar mode="indeterminate" *ngIf="submitting"></mat-progress-bar>
+        </button>
+      </form>
+      <div class="lottie-paper">
+        <ng-lottie [options]="options"></ng-lottie>
+        <div fxLayout="column" fxLayoutAlign="center center">
+          <p>Total à payer</p>
+          <h1 class="mat-display-1">{{total | number: '0.00'}} Ar</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,18 @@
+@import "src/theme";
+
+#app-title {
+  display: flex;
+  padding: 0 0 2em 0;
+  align-items: center;
+}
+
+#title {
+  font-size: 2em;
+  font-weight: bold;
+}
+
+#subtitle {
+  font-size: 1em;
+  margin-left: .5em;
+  color: $secondary-color;
+}
