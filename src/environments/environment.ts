@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  graphql: 'http://localhost:4000/graphql',
-  SERVER_URL: 'http://localhost:4000',
+  graphql: 'https://pharmastage.herokuapp.com/graphql',
+  SERVER_URL: 'https://pharmastage.herokuapp.com/',
   BREAKPOINT_RESPONSIVE: 1080
   // graphql: 'https://pharmabot.mg/graphql',
   // SERVER_URL: 'https://pharmabot.mg'
